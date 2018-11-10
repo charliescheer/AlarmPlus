@@ -13,6 +13,8 @@
 		BABA18DB2197911300B03CCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BABA18DA2197911300B03CCD /* Assets.xcassets */; };
 		BABA18DE2197911300B03CCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BABA18DC2197911300B03CCD /* LaunchScreen.storyboard */; };
 		BABA18E621979A2C00B03CCD /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18E521979A2C00B03CCD /* Alarm.swift */; };
+		BABA18E82197A42500B03CCD /* Snooze.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18E72197A42500B03CCD /* Snooze.swift */; };
+		BABA18EA2197A44D00B03CCD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18E92197A44D00B03CCD /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		BABA18DD2197911300B03CCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BABA18DF2197911300B03CCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BABA18E521979A2C00B03CCD /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		BABA18E72197A42500B03CCD /* Snooze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snooze.swift; sourceTree = "<group>"; };
+		BABA18E92197A44D00B03CCD /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 				BABA18D32197911100B03CCD /* AppDelegate.swift */,
 				BABA18D52197911100B03CCD /* ViewController.swift */,
 				BABA18E521979A2C00B03CCD /* Alarm.swift */,
+				BABA18E92197A44D00B03CCD /* Alert.swift */,
+				BABA18E72197A42500B03CCD /* Snooze.swift */,
 				BABA18D72197911100B03CCD /* Main.storyboard */,
 				BABA18DA2197911300B03CCD /* Assets.xcassets */,
 				BABA18DC2197911300B03CCD /* LaunchScreen.storyboard */,
@@ -139,7 +145,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BABA18D62197911100B03CCD /* ViewController.swift in Sources */,
+				BABA18E82197A42500B03CCD /* Snooze.swift in Sources */,
 				BABA18D42197911100B03CCD /* AppDelegate.swift in Sources */,
+				BABA18EA2197A44D00B03CCD /* Alert.swift in Sources */,
 				BABA18E621979A2C00B03CCD /* Alarm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
