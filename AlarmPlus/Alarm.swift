@@ -9,5 +9,5 @@
 import UIKit
 
 class Alarms: NSObject {
-    
+    var time: NSDate?
 }
