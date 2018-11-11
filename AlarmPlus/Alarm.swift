@@ -19,6 +19,54 @@ class Alarms: NSObject {
     var alert: Alert?
     
     
+    
+    func enableRepeat() {
+        self.repeatAlarm = true
+    }
+    
+    func disableRepeat() {
+        self.repeatAlarm = false
+    }
+    
+    func doesAlarmRepeat() -> Bool {
+        return repeatAlarm
+    }
+    
+    func enableAlarm() {
+        self.alarmEnabled = true
+    }
+    
+    func disableAlarm() {
+        self.alarmEnabled = false
+    }
+    
+    func isAlarmEnabled() -> Bool {
+        return alarmEnabled
+    }
+    
+    func resetSnoozeCount() {
+        self.timesSnoozed = 0
+    }
+    
+    func increaseSnoozeCount() {
+        self.timesSnoozed += 1
+    }
+    
+    func getSnoozeCount() -> Int {
+        return self.timesSnoozed
+    }
+    
+    func addDayToAlarm(_ date: String) {
+        self.daysActive.append(date)
+    }
+    
+    func getAlarmDates() -> [String] {
+        return self.daysActive
+    }
+    
+    func removeDayFromAlarm(_ date: String){
+        
+    }
 }
 
 
@@ -35,16 +83,18 @@ class Alarms: NSObject {
 //* Methods
 //* SetAlarm -> Void
 //* GetAlarm -> NSDate
-//* enableRepeat -> Void
-//* disableRepeat -> Void
-//* doesAlarmRepeat -> Bool
-//* addDateToAlarm(date) -> Void
-//* getAlertDates -> [String] (possibly [Date])
-//* resetSnoozeCount -> Void
-//* increaseSnoozecount -> Void
-//* getSnoozeCount -> Int
+//* removeDayFromAlarm(date) -> void
 //* SetAlertType(sender: alertType) -> void
 //* setSnoozeChallengeType(sender: challengeType) -> Void
-//* isAlarmEnabled -> Bool
-//* enableAlarm ->Void
-//* disableAlarm -> Void
+
+//* COMPLETE isAlarmEnabled -> Bool
+//* COMPLETE enableAlarm ->Void
+//* COMPLETE disableAlarm -> Void
+//* COMPLETE enableRepeat -> Void
+//* COMPLETE disableRepeat -> Void
+//* COMPLETE doesAlarmRepeat -> Bool
+//* COMPLETE resetSnoozeCount -> Void
+//* COMPLETE increaseSnoozecount -> Void
+//* COMPLETE getSnoozeCount -> Int
+//* COMPLETE addDateToAlarm(date) -> Void
+//* COMPLETE getAlertDates -> [String] (possibly [Date])\
