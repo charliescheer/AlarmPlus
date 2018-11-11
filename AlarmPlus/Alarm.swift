@@ -9,11 +9,12 @@
 import UIKit
 
 class Alarms: NSObject {
-    private var alarmTime: NSDate?
+    private var alarmTime: [Int] = []
     private var timesSnoozed: Int = 0
     private var repeatAlarm: Bool = false
     private var daysActive: [String] = []
     private var alarmEnabled: Bool = true
+    private var nextAlarm: NSDate?
     
     var snooze: Snooze?
     var alert: Alert?
@@ -65,27 +66,49 @@ class Alarms: NSObject {
     }
     
     func removeDayFromAlarm(_ date: String){
+        for day in daysActive {
+            if date == day {
+                daysActive.removeAll{
+                    $0 == day
+                }
+            }
+        }
+    }
+    
+    func setAlarmTime(_ hour : Int, _ minute: Int) {
+        self.alarmTime.append(hour)
+        self.alarmTime.append(minute)
+    }
+    
+    func getNextAlarm() -> NSDate? {
+        if let alarm = nextAlarm {
+            return alarm
+        }
+        return nil
+    }
+    
+    func setNextAlarm() {
+        var dateComponents = DateComponents()
+        if alarmTime.count == 1 {
+            dateComponents.hour = alarmTime[0]
+            dateComponents.minute = alarmTime[1]
+        } else {
+            print("Time is out of range")
+        }
+        
+        
         
     }
+    
 }
 
-
-
-//* Properties
-//* Alarm Time : NSDate? - Private
-//* Snooze: Snooze? - Public
-//* Alert: Alert? - Public
-//* number of times snoozed: int = 0 - Private
-//* Repeat: Bool? - Private
-//* Dates: [selected days of the week] - Private
-//* alarm enabled: Bool = false
-
 //* Methods
-//* SetAlarm -> Void
-//* GetAlarm -> NSDate
-//* removeDayFromAlarm(date) -> void
+
+
 //* SetAlertType(sender: alertType) -> void
 //* setSnoozeChallengeType(sender: challengeType) -> Void
+//* setNextAlarm
+
 
 //* COMPLETE isAlarmEnabled -> Bool
 //* COMPLETE enableAlarm ->Void
@@ -97,4 +120,8 @@ class Alarms: NSObject {
 //* COMPLETE increaseSnoozecount -> Void
 //* COMPLETE getSnoozeCount -> Int
 //* COMPLETE addDateToAlarm(date) -> Void
-//* COMPLETE getAlertDates -> [String] (possibly [Date])\
+//* COMPLETE getAlertDates -> [String] (possibly [Date])
+//* COMPLETE removeDayFromAlarm(date) -> void
+//* COMPLETE SetAlarmTime -> Void
+//* COMPLETE GetNextAlarm -> NSDate
+//* COMPLETE getNextAlarm
