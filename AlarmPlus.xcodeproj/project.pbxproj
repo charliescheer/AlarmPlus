@@ -41,6 +41,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA2564B12197B65300C712C2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BABA18E521979A2C00B03CCD /* Alarm.swift */,
+				BABA18E92197A44D00B03CCD /* Alert.swift */,
+				BABA18E72197A42500B03CCD /* Snooze.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		BABA18C72197911100B03CCD = {
 			isa = PBXGroup;
 			children = (
@@ -60,11 +70,9 @@
 		BABA18D22197911100B03CCD /* AlarmPlus */ = {
 			isa = PBXGroup;
 			children = (
+				BA2564B12197B65300C712C2 /* Models */,
 				BABA18D32197911100B03CCD /* AppDelegate.swift */,
 				BABA18D52197911100B03CCD /* ViewController.swift */,
-				BABA18E521979A2C00B03CCD /* Alarm.swift */,
-				BABA18E92197A44D00B03CCD /* Alert.swift */,
-				BABA18E72197A42500B03CCD /* Snooze.swift */,
 				BABA18D72197911100B03CCD /* Main.storyboard */,
 				BABA18DA2197911300B03CCD /* Assets.xcassets */,
 				BABA18DC2197911300B03CCD /* LaunchScreen.storyboard */,
