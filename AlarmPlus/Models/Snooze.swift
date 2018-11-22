@@ -1,5 +1,5 @@
 //
-//  Alarm.swift
+//  Snooze.swift
 //  AlarmPlus
 //
 //  Created by Charlie Scheer on 11/10/18.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class Alarms: NSObject {
+class Snooze: NSObject {
     
 }
