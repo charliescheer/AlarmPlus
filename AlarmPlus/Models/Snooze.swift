@@ -64,6 +64,11 @@ class Snooze: NSObject {
         //Challenge functions should be built here?  Maybe in an extension?
     }
     
+    func newfunc() {
+      challengeType = "test"
+    }
+    
+    
     
 }
 
