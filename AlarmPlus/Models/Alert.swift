@@ -40,7 +40,7 @@ class Alert: NSObject {
         
     }
     
-    func getAlarmVolume() -> Double {
+    func getAlarmVolume() -> Double? {
         return alertVolume
     }
 }

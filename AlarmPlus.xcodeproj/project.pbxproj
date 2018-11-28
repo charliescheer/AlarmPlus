@@ -8,19 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		BABA18D42197911100B03CCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18D32197911100B03CCD /* AppDelegate.swift */; };
-		BABA18D62197911100B03CCD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18D52197911100B03CCD /* ViewController.swift */; };
+		BABA18D62197911100B03CCD /* AlarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18D52197911100B03CCD /* AlarmTableViewController.swift */; };
 		BABA18D92197911100B03CCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BABA18D72197911100B03CCD /* Main.storyboard */; };
 		BABA18DB2197911300B03CCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BABA18DA2197911300B03CCD /* Assets.xcassets */; };
 		BABA18DE2197911300B03CCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BABA18DC2197911300B03CCD /* LaunchScreen.storyboard */; };
 		BABA18E621979A2C00B03CCD /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18E521979A2C00B03CCD /* Alarm.swift */; };
 		BABA18E82197A42500B03CCD /* Snooze.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18E72197A42500B03CCD /* Snooze.swift */; };
 		BABA18EA2197A44D00B03CCD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18E92197A44D00B03CCD /* Alert.swift */; };
+		BAE4D8C121AF4852004A70AB /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4D8C021AF4852004A70AB /* Schedule.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BABA18D02197911100B03CCD /* AlarmPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BABA18D32197911100B03CCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BABA18D52197911100B03CCD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BABA18D52197911100B03CCD /* AlarmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewController.swift; sourceTree = "<group>"; };
 		BABA18D82197911100B03CCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BABA18DA2197911300B03CCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BABA18DD2197911300B03CCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -28,6 +29,7 @@
 		BABA18E521979A2C00B03CCD /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		BABA18E72197A42500B03CCD /* Snooze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snooze.swift; sourceTree = "<group>"; };
 		BABA18E92197A44D00B03CCD /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		BAE4D8C021AF4852004A70AB /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 				BABA18E521979A2C00B03CCD /* Alarm.swift */,
 				BABA18E92197A44D00B03CCD /* Alert.swift */,
 				BABA18E72197A42500B03CCD /* Snooze.swift */,
+				BAE4D8C021AF4852004A70AB /* Schedule.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -70,15 +73,23 @@
 		BABA18D22197911100B03CCD /* AlarmPlus */ = {
 			isa = PBXGroup;
 			children = (
+				BAE4D8BF21AF45FE004A70AB /* Views */,
 				BA2564B12197B65300C712C2 /* Models */,
 				BABA18D32197911100B03CCD /* AppDelegate.swift */,
-				BABA18D52197911100B03CCD /* ViewController.swift */,
-				BABA18D72197911100B03CCD /* Main.storyboard */,
 				BABA18DA2197911300B03CCD /* Assets.xcassets */,
 				BABA18DC2197911300B03CCD /* LaunchScreen.storyboard */,
 				BABA18DF2197911300B03CCD /* Info.plist */,
 			);
 			path = AlarmPlus;
+			sourceTree = "<group>";
+		};
+		BAE4D8BF21AF45FE004A70AB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BABA18D72197911100B03CCD /* Main.storyboard */,
+				BABA18D52197911100B03CCD /* AlarmTableViewController.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,7 +163,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BABA18D62197911100B03CCD /* ViewController.swift in Sources */,
+				BAE4D8C121AF4852004A70AB /* Schedule.swift in Sources */,
+				BABA18D62197911100B03CCD /* AlarmTableViewController.swift in Sources */,
 				BABA18E82197A42500B03CCD /* Snooze.swift in Sources */,
 				BABA18D42197911100B03CCD /* AppDelegate.swift in Sources */,
 				BABA18EA2197A44D00B03CCD /* Alert.swift in Sources */,
