@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    let alarm = Alarms()
+class AlarmTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
