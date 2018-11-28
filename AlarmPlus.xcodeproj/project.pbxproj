@@ -16,6 +16,7 @@
 		BABA18E82197A42500B03CCD /* Snooze.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18E72197A42500B03CCD /* Snooze.swift */; };
 		BABA18EA2197A44D00B03CCD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18E92197A44D00B03CCD /* Alert.swift */; };
 		BAE4D8C121AF4852004A70AB /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4D8C021AF4852004A70AB /* Schedule.swift */; };
+		BAE4D8C521AF4CBE004A70AB /* StylingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4D8C421AF4CBE004A70AB /* StylingConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		BABA18E72197A42500B03CCD /* Snooze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snooze.swift; sourceTree = "<group>"; };
 		BABA18E92197A44D00B03CCD /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		BAE4D8C021AF4852004A70AB /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		BAE4D8C421AF4CBE004A70AB /* StylingConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StylingConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,10 +88,19 @@
 		BAE4D8BF21AF45FE004A70AB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BAE4D8C321AF4CA0004A70AB /* Styling */,
 				BABA18D72197911100B03CCD /* Main.storyboard */,
 				BABA18D52197911100B03CCD /* AlarmTableViewController.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BAE4D8C321AF4CA0004A70AB /* Styling */ = {
+			isa = PBXGroup;
+			children = (
+				BAE4D8C421AF4CBE004A70AB /* StylingConstants.swift */,
+			);
+			path = Styling;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAE4D8C521AF4CBE004A70AB /* StylingConstants.swift in Sources */,
 				BAE4D8C121AF4852004A70AB /* Schedule.swift in Sources */,
 				BABA18D62197911100B03CCD /* AlarmTableViewController.swift in Sources */,
 				BABA18E82197A42500B03CCD /* Snooze.swift in Sources */,
