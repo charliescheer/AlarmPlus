@@ -8,6 +8,11 @@
 
 import UIKit
 
-enum styles {
+enum definedColors {
     static let backgroundColor = UIColor.gray
+    static let defaultFontColor = UIColor.white
+}
+
+enum definedSizes {
+    static let HeaderFontSize = 30
 }

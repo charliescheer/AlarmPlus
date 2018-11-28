@@ -17,6 +17,7 @@
 		BABA18EA2197A44D00B03CCD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18E92197A44D00B03CCD /* Alert.swift */; };
 		BAE4D8C121AF4852004A70AB /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4D8C021AF4852004A70AB /* Schedule.swift */; };
 		BAE4D8C521AF4CBE004A70AB /* StylingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4D8C421AF4CBE004A70AB /* StylingConstants.swift */; };
+		BAE4D8C721AF56C4004A70AB /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4D8C621AF56C4004A70AB /* AlarmTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		BABA18E92197A44D00B03CCD /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		BAE4D8C021AF4852004A70AB /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		BAE4D8C421AF4CBE004A70AB /* StylingConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StylingConstants.swift; sourceTree = "<group>"; };
+		BAE4D8C621AF56C4004A70AB /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				BAE4D8C321AF4CA0004A70AB /* Styling */,
 				BABA18D72197911100B03CCD /* Main.storyboard */,
 				BABA18D52197911100B03CCD /* AlarmTableViewController.swift */,
+				BAE4D8C621AF56C4004A70AB /* AlarmTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 				BAE4D8C521AF4CBE004A70AB /* StylingConstants.swift in Sources */,
 				BAE4D8C121AF4852004A70AB /* Schedule.swift in Sources */,
 				BABA18D62197911100B03CCD /* AlarmTableViewController.swift in Sources */,
+				BAE4D8C721AF56C4004A70AB /* AlarmTableViewCell.swift in Sources */,
 				BABA18E82197A42500B03CCD /* Snooze.swift in Sources */,
 				BABA18D42197911100B03CCD /* AppDelegate.swift in Sources */,
 				BABA18EA2197A44D00B03CCD /* Alert.swift in Sources */,

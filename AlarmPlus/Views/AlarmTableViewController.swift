@@ -24,7 +24,8 @@ class AlarmTableViewController: UITableViewController {
     }
     
     func setupView() {
-        view.backgroundColor = styles.backgroundColor
+        view.backgroundColor = definedColors.backgroundColor
+        table.rowHeight = 95
     }
     
     func getSavedAlarmsFromMemory() {
@@ -43,20 +44,23 @@ class AlarmTableViewController: UITableViewController {
 
 extension AlarmTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: constants.alarmCellIdentifier)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: constants.alarmCellIdentifier, for: indexPath) as? AlarmTableViewCell else {
+            return UITableViewCell()
+        }
         
         setupCellStyle(cell: cell)
         
-        cell.textLabel?.text = "test"
         return cell
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func setupCellStyle(cell: UITableViewCell) {
-        cell.backgroundColor = styles.backgroundColor
+    func setupCellStyle(cell: AlarmTableViewCell) {
+        cell.backgroundColor = definedColors.backgroundColor
+        
     }
     
     
