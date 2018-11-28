@@ -11,7 +11,8 @@ import UIKit
 class AlarmTableViewController: UITableViewController {
     var scheduledAlarmEvents : [Date] = []
     
-
+    @IBOutlet var table: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getSavedAlarmsFromMemory()
@@ -43,12 +44,19 @@ class AlarmTableViewController: UITableViewController {
 extension AlarmTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: constants.alarmCellIdentifier)
+        
+        setupCellStyle(cell: cell)
+        
         cell.textLabel?.text = "test"
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return scheduledAlarmEvents.count
+        return 1
+    }
+    
+    func setupCellStyle(cell: UITableViewCell) {
+        cell.backgroundColor = styles.backgroundColor
     }
     
     
