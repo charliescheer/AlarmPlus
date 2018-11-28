@@ -13,7 +13,22 @@ class Snooze: NSObject {
     private var snoozeLimitCount : Int = 0
     private var snoozeLimitReached : Bool = false
     private var challengeType : String = challenges.code
+    private var timesSnoozed: Int = 0
+    
     var challengeUI : UIView?
+    
+    
+    func resetSnoozeCount() {
+        self.timesSnoozed = 0
+    }
+    
+    func increaseSnoozeCount() {
+        self.timesSnoozed += 1
+    }
+    
+    func getSnoozeCount() -> Int {
+        return self.timesSnoozed
+    }
     
     func enableSnoozeLimit() {
         snoozeLimitEnabled = true

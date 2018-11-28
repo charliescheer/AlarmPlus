@@ -9,9 +9,13 @@
 import UIKit
 
 class AlarmTableViewController: UITableViewController {
+    
+    var alarm = Alarm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     
     }
 
