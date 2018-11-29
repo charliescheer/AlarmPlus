@@ -184,6 +184,15 @@
                             <outlet property="delegate" destination="JjH-Kz-IHY" id="eVs-Y6-axD"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="f5k-bS-RVD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Yap-ub-AXK">
+                            <connections>
+                                <action selector="doneWasPressed:" destination="JjH-Kz-IHY" id="Dl8-Lk-QIW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZ9-Gj-lis" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -22,6 +22,14 @@ class AlarmSettingsTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func doneWasPressed(_ sender: Any) {
+        //create the dictionary in the Alarm object with all of the days and date objects
+        
+        //return to the alarm VC
+        
+    }
+    
+    
     //Function gets the information from existing alarm and pupulates it on the view
     func setupAlarmInfo() {
         
