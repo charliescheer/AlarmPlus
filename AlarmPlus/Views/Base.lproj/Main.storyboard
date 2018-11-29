@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="alarmCell" rowHeight="95" id="xsc-TP-pnS">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="alarmCell" rowHeight="95" id="xsc-TP-pnS" customClass="AlarmTableViewCell" customModule="AlarmPlus" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="95"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xsc-TP-pnS" id="BVk-l6-AdZ" customClass="AlarmTableViewCell" customModule="AlarmPlus" customModuleProvider="target">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xsc-TP-pnS" id="BVk-l6-AdZ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="94.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -71,6 +71,9 @@
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Btm-DG-gYR">
                                             <rect key="frame" x="310" y="10.5" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="alarmEnabledSwitchTapped:" destination="xsc-TP-pnS" eventType="valueChanged" id="qk3-Bf-p2z"/>
+                                            </connections>
                                         </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snooze Limit:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgz-9X-WXc">
                                             <rect key="frame" x="219" y="60" width="115" height="23"/>
@@ -115,10 +118,19 @@
                                         <constraint firstItem="cgz-9X-WXc" firstAttribute="centerY" secondItem="xJB-Vg-SIg" secondAttribute="centerY" id="v5T-Xe-VsO"/>
                                         <constraint firstItem="3jH-DU-Kic" firstAttribute="centerY" secondItem="eTI-Gv-wT8" secondAttribute="centerY" id="x2g-pP-Z9k"/>
                                     </constraints>
-                                    <connections>
-                                        <outlet property="scheduledTimeLabel" destination="RHP-h0-lyj" id="fpo-Br-nQe"/>
-                                    </connections>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="alarmEnabledSwitch" destination="Btm-DG-gYR" id="iZG-mT-P0m"/>
+                                    <outlet property="fridayLabel" destination="x3B-Wx-Tmv" id="o5L-si-Dxz"/>
+                                    <outlet property="mondayLabel" destination="lSJ-Bu-Vnq" id="Nc9-Bv-aRt"/>
+                                    <outlet property="saturdayLabel" destination="5Qq-QI-7km" id="ZLR-yB-leD"/>
+                                    <outlet property="scheduledTimeLabel" destination="RHP-h0-lyj" id="rSj-Qz-GaQ"/>
+                                    <outlet property="snoozeLimitLabel" destination="1DI-zb-g04" id="SG4-tf-jb9"/>
+                                    <outlet property="sundayLabel" destination="xJB-Vg-SIg" id="ozh-Py-bVn"/>
+                                    <outlet property="thursdayLabel" destination="3jH-DU-Kic" id="sKq-KP-RMV"/>
+                                    <outlet property="tuesdayLabel" destination="fMH-8j-n9g" id="wCM-yO-wT1"/>
+                                    <outlet property="wednesdayLabel" destination="eTI-Gv-wT8" id="CvV-2M-ygP"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

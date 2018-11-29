@@ -11,6 +11,8 @@ import UIKit
 enum definedColors {
     static let backgroundColor = UIColor.gray
     static let defaultFontColor = UIColor.white
+    static let activatedFrontColor = UIColor.white
+    static let deactivatedFontColor = UIColor.darkGray
 }
 
 enum definedSizes {
