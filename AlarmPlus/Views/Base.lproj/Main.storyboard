@@ -130,7 +130,6 @@
                                     <outlet property="thursdayLabel" destination="3jH-DU-Kic" id="sKq-KP-RMV"/>
                                     <outlet property="tuesdayLabel" destination="fMH-8j-n9g" id="wCM-yO-wT1"/>
                                     <outlet property="wednesdayLabel" destination="eTI-Gv-wT8" id="CvV-2M-ygP"/>
-                                    <segue destination="JjH-Kz-IHY" kind="show" identifier="toAlarmSettings" id="Ydb-cw-cfh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -155,6 +154,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="table" destination="f7c-LC-PpI" id="coG-bF-VFa"/>
+                        <segue destination="JjH-Kz-IHY" kind="show" identifier="toAlarmSettings" id="WvV-Hv-edp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eKY-cg-SBW" userLabel="First Responder" sceneMemberID="firstResponder"/>

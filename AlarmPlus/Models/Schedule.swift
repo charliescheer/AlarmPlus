@@ -40,8 +40,8 @@ class Schedule: NSObject {
         return alarmEnabled
     }
     
-    func addDayToAlarm(daysArray: [Int]) {
-        self.daysActive = daysArray
+    func addDayToAlarm(dayInt: Int) {
+        self.daysActive.append(dayInt)
     }
     
     func getAlarmDays() -> [Int] {
@@ -85,6 +85,25 @@ class Schedule: NSObject {
         dateComponents.year = nextScheduleDateComponents.year
         
         activeAlarms[day] = dateComponents.date
+    }
+    
+    //returns an int that represents what day of the week it is currently.
+    //Sunday = 1 and increases by one till Saturday = 7
+    //If a date can't be obtained will return 1 - Sunday
+    func getTodaysDayIndex() -> Int {
+        var todaysDayIndex = 0
+        let newDate = Date()
+        
+        let calendar = Calendar(identifier: .gregorian)
+        let todaysDateCompenents = calendar.dateComponents(in: .current, from: newDate)
+        
+        if let dayIndex = todaysDateCompenents.day {
+            todaysDayIndex = dayIndex
+        } else {
+            todaysDayIndex = 1
+        }
+        
+        return todaysDayIndex
     }
     
     private func setHoursAndMinutesForNewAlarm(_ dateComponents: DateComponents) -> DateComponents{
