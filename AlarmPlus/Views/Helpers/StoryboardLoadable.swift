@@ -26,7 +26,6 @@ public extension StoryboardLoadable where Self: UIViewController {
     
     static func loadViewController() -> Self {
         let storyboard = UIStoryboard(name: storyboardName, bundle: bundle)
-        print(storyboardName)
         guard let viewController = storyboard.instantiateViewController(withIdentifier: controllerID) as? Self else {
             fatalError("[StoryboardLoadable] Cannot instantiate view controller from storyboard.")
         }

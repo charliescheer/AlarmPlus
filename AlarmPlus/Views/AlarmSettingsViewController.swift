@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlarmSettingsTableViewController: UITableViewController {
+class AlarmSettingsViewController: UIViewController {
     var alarm : Alarm?
     
     
@@ -49,25 +49,32 @@ class AlarmSettingsTableViewController: UITableViewController {
     }
 }
 
-extension AlarmSettingsTableViewController {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return constants.settingsArray.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell  = UITableViewCell(style: .default, reuseIdentifier: "settingsCell")
-        
-        cell.textLabel?.text = constants.settingsArray[indexPath.row]
-        
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+//extension AlarmSettingsTableViewController {
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return constants.settingsArray.count
+//    }
+//
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell  = UITableViewCell(style: .default, reuseIdentifier: "settingsCell")
+//
+//        cell.textLabel?.text = constants.settingsArray[indexPath.row]
+//
+//        return cell
+//    }
+//
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//    }
+//}
+
+extension AlarmSettingsViewController: StoryboardLoadable {
+    static var storyboardName: String {
+        return "AlarmSettings"
     }
 }
 
-extension AlarmSettingsTableViewController {
+
+extension AlarmSettingsViewController {
     enum constants {
         static let settingsArray = ["Time", "Days", "Repeat", "Snooze", "Alert", "Challenge"]
     }

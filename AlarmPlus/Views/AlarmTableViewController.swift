@@ -19,7 +19,8 @@ class AlarmTableViewController: UITableViewController {
     }
     
     @IBAction func addWasPressed(_ sender: Any) {
-        performSegue(withIdentifier: constants.alarmSettingsSegue, sender: sender)
+        let controller = AlarmSettingsViewController.loadViewController()
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     override func viewDidLoad() {
