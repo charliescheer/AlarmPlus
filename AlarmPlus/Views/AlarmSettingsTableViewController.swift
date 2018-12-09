@@ -29,6 +29,11 @@ class AlarmSettingsTableViewController: UITableViewController {
         
     }
     
+    @IBAction func testDoneWasPressed(_ sender: Any) {
+        let controller = TimeSettingsUIViewController.loadViewController()
+        navigationController?.pushViewController(controller, animated: true)
+        
+    }
     
     //Function gets the information from existing alarm and pupulates it on the view
     func setupAlarmInfo() {
@@ -55,6 +60,10 @@ extension AlarmSettingsTableViewController {
         cell.textLabel?.text = constants.settingsArray[indexPath.row]
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
 }
 

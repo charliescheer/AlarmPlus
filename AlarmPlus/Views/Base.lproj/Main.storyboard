@@ -186,11 +186,18 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="f5k-bS-RVD">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Yap-ub-AXK">
-                            <connections>
-                                <action selector="doneWasPressed:" destination="JjH-Kz-IHY" id="Dl8-Lk-QIW"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="done" id="Yap-ub-AXK">
+                                <connections>
+                                    <action selector="doneWasPressed:" destination="JjH-Kz-IHY" id="Dl8-Lk-QIW"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="done" id="gy7-Na-NA8">
+                                <connections>
+                                    <action selector="testDoneWasPressed:" destination="JjH-Kz-IHY" id="RFV-4r-iL0"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
