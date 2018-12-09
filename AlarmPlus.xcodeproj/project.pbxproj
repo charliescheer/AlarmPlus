@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA7DD23B21BDB4020081849B /* TimeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7DD23A21BDB4020081849B /* TimeSettingsViewController.swift */; };
 		BA7DD23E21BDB48C0081849B /* AlarmSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA7DD23D21BDB48C0081849B /* AlarmSettings.storyboard */; };
 		BA7DD24121BDD4290081849B /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7DD24021BDD4290081849B /* StoryboardLoadable.swift */; };
 		BA911DA021B092F60033A753 /* AlarmSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA911D9F21B092F60033A753 /* AlarmSettingsViewController.swift */; };
@@ -26,7 +25,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BA7DD23A21BDB4020081849B /* TimeSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingsViewController.swift; sourceTree = "<group>"; };
 		BA7DD23D21BDB48C0081849B /* AlarmSettings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AlarmSettings.storyboard; sourceTree = "<group>"; };
 		BA7DD24021BDD4290081849B /* StoryboardLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
 		BA911D9F21B092F60033A753 /* AlarmSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingsViewController.swift; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				BA911D9F21B092F60033A753 /* AlarmSettingsViewController.swift */,
 				BABA18D52197911100B03CCD /* AlarmTableViewController.swift */,
 				BAE4D8C621AF56C4004A70AB /* AlarmTableViewCell.swift */,
-				BA7DD23A21BDB4020081849B /* TimeSettingsViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,7 +208,6 @@
 			files = (
 				BAE4D8C521AF4CBE004A70AB /* StylingConstants.swift in Sources */,
 				BAE4D8C121AF4852004A70AB /* Schedule.swift in Sources */,
-				BA7DD23B21BDB4020081849B /* TimeSettingsViewController.swift in Sources */,
 				BABA18D62197911100B03CCD /* AlarmTableViewController.swift in Sources */,
 				BA7DD24121BDD4290081849B /* StoryboardLoadable.swift in Sources */,
 				BA911DA021B092F60033A753 /* AlarmSettingsViewController.swift in Sources */,
