@@ -142,7 +142,7 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="HBZ-Dt-fcJ">
                                 <connections>
-                                    <action selector="addWasPressed:" destination="3Th-Hu-mjb" id="0F2-R0-dTz"/>
+                                    <action selector="addWasPressed:" destination="3Th-Hu-mjb" id="QCB-0R-8FC"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="edit" id="dJ0-kh-pEp">
@@ -154,56 +154,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="table" destination="f7c-LC-PpI" id="coG-bF-VFa"/>
-                        <segue destination="JjH-Kz-IHY" kind="show" identifier="toAlarmSettings" id="WvV-Hv-edp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eKY-cg-SBW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1210.4000000000001" y="92.203898050974516"/>
-        </scene>
-        <!--Alarm Settings Table View Controller-->
-        <scene sceneID="KV2-i8-vfW">
-            <objects>
-                <tableViewController id="JjH-Kz-IHY" customClass="AlarmSettingsTableViewController" customModule="AlarmPlus" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KnI-CU-Y6O">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="4Kk-j7-rh8">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Kk-j7-rh8" id="jp3-nm-XCC">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="JjH-Kz-IHY" id="ybO-dq-fqD"/>
-                            <outlet property="delegate" destination="JjH-Kz-IHY" id="eVs-Y6-axD"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="f5k-bS-RVD">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="done" id="Yap-ub-AXK">
-                                <connections>
-                                    <action selector="doneWasPressed:" destination="JjH-Kz-IHY" id="Dl8-Lk-QIW"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="done" id="gy7-Na-NA8">
-                                <connections>
-                                    <action selector="testDoneWasPressed:" destination="JjH-Kz-IHY" id="RFV-4r-iL0"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gZ9-Gj-lis" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2206" y="92"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8g3-9O-1bY">

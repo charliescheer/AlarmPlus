@@ -25,40 +25,61 @@
                                     <!--2018-12-09 23:14:14 +0000-->
                                 </date>
                             </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gG-oa-zyn">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gG-oa-zyn">
                                 <rect key="frame" x="16" y="255" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Su"/>
+                                <connections>
+                                    <action selector="dateWasPressed:" destination="kuF-j0-mas" eventType="touchUpInside" id="7rN-vN-b5l"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQK-mP-tyr">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQK-mP-tyr">
                                 <rect key="frame" x="70" y="255" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="M"/>
+                                <connections>
+                                    <action selector="dateWasPressed:" destination="kuF-j0-mas" eventType="touchUpInside" id="7oy-Zq-a5W"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Bi-hq-zgC">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Bi-hq-zgC">
                                 <rect key="frame" x="124" y="255" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="T"/>
+                                <connections>
+                                    <action selector="dateWasPressed:" destination="kuF-j0-mas" eventType="touchUpInside" id="dJM-5D-5BL"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3sa-6M-zdN">
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3sa-6M-zdN">
                                 <rect key="frame" x="164" y="255" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="W"/>
+                                <connections>
+                                    <action selector="dateWasPressed:" destination="kuF-j0-mas" eventType="touchUpInside" id="qRC-L3-zXE"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IaJ-N7-OKE">
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IaJ-N7-OKE">
                                 <rect key="frame" x="218" y="255" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="TH"/>
+                                <connections>
+                                    <action selector="dateWasPressed:" destination="kuF-j0-mas" eventType="touchUpInside" id="U5d-FH-AF5"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNd-aw-8Tp">
+                            <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNd-aw-8Tp">
                                 <rect key="frame" x="272" y="255" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="F"/>
+                                <connections>
+                                    <action selector="dateWasPressed:" destination="kuF-j0-mas" eventType="touchUpInside" id="Lny-8U-Z2q"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPU-ty-f3y">
+                            <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPU-ty-f3y">
                                 <rect key="frame" x="326" y="255" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="S"/>
+                                <connections>
+                                    <action selector="dateWasPressed:" destination="kuF-j0-mas" eventType="touchUpInside" id="ahu-2O-e8W"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Snooze" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Oc-1X-olY">
                                 <rect key="frame" x="159" y="427" width="57" height="21"/>
@@ -99,6 +120,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="bsZ-OY-DPa"/>
                     </view>
+                    <connections>
+                        <outlet property="datePicker" destination="Caj-dw-nTI" id="XaK-DA-Efw"/>
+                        <outlet property="fridayButton" destination="kNd-aw-8Tp" id="xac-4Z-nju"/>
+                        <outlet property="mondayButton" destination="FQK-mP-tyr" id="sBQ-jV-jHS"/>
+                        <outlet property="saturdayButton" destination="RPU-ty-f3y" id="olS-Nq-sRM"/>
+                        <outlet property="sundayButton" destination="7gG-oa-zyn" id="k8n-xe-WVJ"/>
+                        <outlet property="thursdayButton" destination="IaJ-N7-OKE" id="zf4-Yp-ArQ"/>
+                        <outlet property="tuesdayButton" destination="1Bi-hq-zgC" id="Zgl-mA-v0D"/>
+                        <outlet property="wednesdayButton" destination="3sa-6M-zdN" id="bke-Ke-jEc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nu-m0-QAA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

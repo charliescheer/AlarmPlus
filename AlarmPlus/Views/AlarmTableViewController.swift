@@ -81,18 +81,18 @@ extension AlarmTableViewController {
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == constants.alarmSettingsSegue {
-            let settingsVC = segue.destination as? AlarmTableViewController
-            
-            guard let alarmCell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: alarmCell) else {
-                return
-            }
-            
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == constants.alarmSettingsSegue {
+//            let settingsVC = segue.destination as? AlarmTableViewController
+//
+//            guard let alarmCell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: alarmCell) else {
+//                return
+//            }
+    
             //TO DO - Pass the selected alarm to the settings View controller
             
-        }
-    }
+//        }
+//    }
     
     
 }
