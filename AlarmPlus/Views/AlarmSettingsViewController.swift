@@ -57,7 +57,7 @@ class AlarmSettingsViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setCurrentAlarmDays()
+        
     }
     
     
@@ -75,8 +75,10 @@ class AlarmSettingsViewController: UIViewController {
         
         let (setHour, setMinute) = getUserSetTime(datePicker: datePicker)
         currentAlarm.schedule.setAlarmTime(hour: setHour, minute: setMinute)
+
         
         currentAlarm.schedule.setDayaActive(daysArray: alarmCurrentDays)
+
         
         currentAlarm.schedule.setActiveAlarms()
         
@@ -108,7 +110,7 @@ class AlarmSettingsViewController: UIViewController {
                 }
             }
         }
-        
+        print(alarmCurrentDays)
         datePicker.date = calendar.date(from: dateCompenents)!
     }
     
@@ -143,13 +145,13 @@ class AlarmSettingsViewController: UIViewController {
     }
     
     func setCurrentAlarmDays() {
-        guard let seclectedAlarm = alarm else {
-            return
-        }
-        
-        alarmCurrentDays = seclectedAlarm.schedule.getAlarmDays()
-        
-    }
+//        guard let seclectedAlarm = alarm else {
+//            return
+//        }
+//
+//        alarmCurrentDays = seclectedAlarm.schedule.getAlarmDays()
+//
+//    }
 }
 
 

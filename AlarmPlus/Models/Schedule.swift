@@ -48,6 +48,10 @@ class Schedule: NSObject {
         return self.daysActive
     }
     
+    func getAlarmTimes() -> [Int] {
+        return self.alarmTime
+    }
+    
     func setAlarmTime(hour : Int, minute: Int) {
         self.alarmTime.append(hour)
         self.alarmTime.append(minute)
