@@ -151,7 +151,7 @@ class AlarmSettingsViewController: UIViewController {
 //
 //        alarmCurrentDays = seclectedAlarm.schedule.getAlarmDays()
 //
-//    }
+    }
 }
 
 

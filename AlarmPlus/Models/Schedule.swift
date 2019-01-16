@@ -53,8 +53,7 @@ class Schedule: NSObject {
     }
     
     func setAlarmTime(hour : Int, minute: Int) {
-        self.alarmTime.append(hour)
-        self.alarmTime.append(minute)
+        self.alarmTime = [hour, minute]
     }
     
     func getAlarms() -> [Int : Date] {
@@ -63,6 +62,7 @@ class Schedule: NSObject {
     
     func setActiveAlarms() {
         //adds all of the different scheduled alarms to the activeAlarms array
+        self.activeAlarms = [ : ]
         for day in daysActive {
             addDateToActiveAlarms(day)
         }
