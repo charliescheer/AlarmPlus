@@ -27,10 +27,6 @@ class AlarmSettingsViewController: UIViewController {
         guard let buttonPressed = sender as? UIButton else {
             return
         }
-        
-        print(buttonPressed.tag)
-        print(buttonPressed.isSelected)
-        
         if buttonPressed.isSelected {
             //The day that was selected is currently active in the alarm
             
@@ -39,8 +35,6 @@ class AlarmSettingsViewController: UIViewController {
                 let fAlarmCurrentDays = alarmCurrentDays.filter {$0 != buttonPressed.tag}
                 alarmCurrentDays = fAlarmCurrentDays
             }
-            
-            print(alarmCurrentDays)
         } else {
             //The day is pressed and currently is not active
             
@@ -48,8 +42,6 @@ class AlarmSettingsViewController: UIViewController {
             if alarmCurrentDays.contains(buttonPressed.tag) == false {
                 alarmCurrentDays.append(buttonPressed.tag)
             }
-            
-            print(alarmCurrentDays)
         }
     }
     
@@ -62,10 +54,6 @@ class AlarmSettingsViewController: UIViewController {
         } else {
             setupAlarmInfo()
         }
-        
-        print(alarmCurrentDays)
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,6 +69,18 @@ class AlarmSettingsViewController: UIViewController {
     
     @objc func rightButtonAction(sender: UIBarButtonItem) {
         //Save UIBarbutton item actions
+        guard let currentAlarm = alarm else {
+            return
+        }
+        
+        let (setHour, setMinute) = getUserSetTime(datePicker: datePicker)
+        currentAlarm.schedule.setAlarmTime(hour: setHour, minute: setMinute)
+        
+        currentAlarm.schedule.setDayaActive(daysArray: alarmCurrentDays)
+        
+        currentAlarm.schedule.setActiveAlarms()
+        
+        print(currentAlarm.schedule.getAlarms())
     }
     
     //Function gets the information from existing alarm and pupulates it on the view
@@ -102,8 +102,6 @@ class AlarmSettingsViewController: UIViewController {
         if let todaysDayOfTheWeekIndex = dateCompenents.weekday {
             alarmCurrentDays.append(todaysDayOfTheWeekIndex)
             
-            print(todaysDayOfTheWeekIndex)
-            
             for dayButton in daySelectButtonsArray {
                 if dayButton.tag == todaysDayOfTheWeekIndex {
                     dayButton.isSelected = true
@@ -113,6 +111,7 @@ class AlarmSettingsViewController: UIViewController {
         
         datePicker.date = calendar.date(from: dateCompenents)!
     }
+    
     
     func getUserSetTime(datePicker: UIDatePicker) -> (Int, Int){
         var hour = 0

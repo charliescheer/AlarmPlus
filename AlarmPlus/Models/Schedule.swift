@@ -40,8 +40,8 @@ class Schedule: NSObject {
         return alarmEnabled
     }
     
-    func addDayToAlarm(dayInt: Int) {
-        self.daysActive.append(dayInt)
+    func setDayaActive(daysArray: [Int]) {
+        self.daysActive = daysArray
     }
     
     func getAlarmDays() -> [Int] {
@@ -57,7 +57,7 @@ class Schedule: NSObject {
         return activeAlarms
     }
     
-    func setActiveAlarams() {
+    func setActiveAlarms() {
         //adds all of the different scheduled alarms to the activeAlarms array
         for day in daysActive {
             addDateToActiveAlarms(day)
@@ -66,12 +66,13 @@ class Schedule: NSObject {
     
     func addDateToActiveAlarms(_ day : Int) {
         var dateComponents = DateComponents()
-        let calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .gregorian)
+        let timeZone = TimeZone.current
+        calendar.timeZone = timeZone
         
         dateComponents.calendar = calendar
-        
         //set time for the new alarm
-        if alarmTime.count == 1 {
+        if alarmTime.count == 2 {
             dateComponents = setHoursAndMinutesForNewAlarm(dateComponents)
         } else {
             print("Time is out of range")
@@ -85,6 +86,8 @@ class Schedule: NSObject {
         dateComponents.year = nextScheduleDateComponents.year
         
         activeAlarms[day] = dateComponents.date
+        
+        print(dateComponents)
     }
     
     //returns an int that represents what day of the week it is currently.
@@ -108,8 +111,10 @@ class Schedule: NSObject {
     
     private func setHoursAndMinutesForNewAlarm(_ dateComponents: DateComponents) -> DateComponents{
         var newDateComponents = dateComponents
+        
         newDateComponents.hour = alarmTime[0]
         newDateComponents.minute = alarmTime[1]
+
         
         return newDateComponents
     }
@@ -122,7 +127,6 @@ class Schedule: NSObject {
         let todaysDateCompenents = calendar.dateComponents(in: .current, from: newDate)
         
         if let todaysDayOfTheWeek = todaysDateCompenents.weekday {
-            print(dayOfTheWeek)
             if dayOfTheWeek == todaysDayOfTheWeek {
                 //newDate is already set to today's date, make no changes
             } else if dayOfTheWeek < todaysDayOfTheWeek {
