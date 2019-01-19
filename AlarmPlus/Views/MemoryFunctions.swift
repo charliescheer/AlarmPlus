@@ -9,7 +9,7 @@
 import UIKit
 
 enum MemoryFunctions {
-    static func saveAlarmsArrayToMemory(alarm: Alarm) {
+    static func saveAlarmsDataToMemory(alarm: Alarm) {
         let userDefaults = UserDefaults()
         guard let currentSavedAlarmsArray = userDefaults.array(forKey: defaults.savedAlarms) as? [Alarm] else {
             return
@@ -19,6 +19,26 @@ enum MemoryFunctions {
         alarmsArray.append(alarm)
         
         userDefaults.set(alarmsArray, forKey: defaults.savedAlarms)
+    }
+    
+    static func getSavedAlarmsArray() -> [Alarm] {
+        var alarmsArray : [Alarm] = []
+        
+        guard let arrayData = UserDefaults.standard.data(forKey: defaults.savedAlarms) else {
+            return alarmsArray
+        }
+        
+        do {
+            let tempArray = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(arrayData) as? [Alarm]
+            
+            if let unarchrivedArray = tempArray {
+                alarmsArray = unarchrivedArray
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return alarmsArray
     }
 }
 
