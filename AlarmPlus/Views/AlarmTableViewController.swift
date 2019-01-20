@@ -49,11 +49,6 @@ class AlarmTableViewController: UITableViewController {
     
     }
     
-    func saveSavedAlarmsToMemory() {
-        let userDefaults = UserDefaults()
-        userDefaults.set(alarmsArray, forKey: defaults.saved)
-        
-    }
     
     
     //TO DO - Save the array of alarms

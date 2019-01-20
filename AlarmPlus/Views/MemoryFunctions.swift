@@ -9,17 +9,6 @@
 import UIKit
 
 enum MemoryFunctions {
-    static func saveAlarmsDataToMemory(alarm: Alarm) {
-        let userDefaults = UserDefaults()
-        guard let currentSavedAlarmsArray = userDefaults.array(forKey: defaults.savedAlarms) as? [Alarm] else {
-            return
-        }
-        
-        var alarmsArray = currentSavedAlarmsArray
-        alarmsArray.append(alarm)
-        
-        userDefaults.set(alarmsArray, forKey: defaults.savedAlarms)
-    }
     
     static func getSavedAlarmsArray() -> [Alarm] {
         var alarmsArray : [Alarm] = []
@@ -29,7 +18,20 @@ enum MemoryFunctions {
         }
         
         do {
-            let tempArray = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(arrayData) as? [Alarm]
+            let unarchivedArray = try unarchiveAlarmArrayData(arrayData)
+            alarmsArray = unarchivedArray
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return alarmsArray
+    }
+    
+    static func unarchiveAlarmArrayData(_ data : Data) throws -> [Alarm] {
+        var alarmsArray : [Alarm] = []
+        
+        do {
+            let tempArray = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Alarm]
             
             if let unarchrivedArray = tempArray {
                 alarmsArray = unarchrivedArray
@@ -40,6 +42,21 @@ enum MemoryFunctions {
         
         return alarmsArray
     }
+    
+    static func convertAlarmArrayToDate(alarmArray : [Alarm]) throws -> Data{
+        var data = Data()
+        
+        let tempData = try NSKeyedArchiver.archivedData(withRootObject: alarmArray, requiringSecureCoding: false)
+        
+        data = tempData
+        
+        return data
+    }
+    
+    static func saveAlarmsDataToMemory(alarmData: Data) {
+        UserDefaults.standard.set(alarmData, forKey: defaults.savedAlarms)
+    }
+    
 }
 
 enum defaults {

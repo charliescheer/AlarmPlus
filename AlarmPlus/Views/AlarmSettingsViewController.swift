@@ -83,7 +83,7 @@ class AlarmSettingsViewController: UIViewController {
         currentAlarm.schedule.setActiveAlarms()
         
         do {
-            let convertedData = try convertAlarmArrayToDate()
+            let convertedData = try MemoryFunctions.convertAlarmArrayToDate()
         } catch {
             print(error.localizedDescription)
         }
@@ -118,18 +118,6 @@ class AlarmSettingsViewController: UIViewController {
         }
         print(alarmCurrentDays)
         datePicker.date = calendar.date(from: dateCompenents)!
-    }
-    
-    func convertAlarmArrayToDate() throws -> Data{
-        var data = Data()
-        let savedAlarmsArray = MemoryFunctions.getSavedAlarmsArray()
-        
-        let tempData = try NSKeyedArchiver.archivedData(withRootObject: savedAlarmsArray, requiringSecureCoding: false)
-
-        data = tempData
-        
-        return data
-        
     }
     
     
