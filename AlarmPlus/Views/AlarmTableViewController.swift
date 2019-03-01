@@ -38,10 +38,15 @@ class AlarmTableViewController: UITableViewController {
         table.rowHeight = 95
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        MemoryFunctions.saveAlarmsToUserDefaults(alarmsArray)
+    }
+    
     
 }
 
 extension AlarmTableViewController {
+    //TableView functions
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: constants.alarmCellIdentifier, for: indexPath) as? AlarmTableViewCell else {
             return UITableViewCell()
@@ -62,6 +67,15 @@ extension AlarmTableViewController {
     func setupCellStyle(cell: AlarmTableViewCell) {
         cell.backgroundColor = definedColors.backgroundColor
         
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            self.alarmsArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+     
+        return [delete]
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

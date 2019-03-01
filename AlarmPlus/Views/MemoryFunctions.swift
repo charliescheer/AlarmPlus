@@ -90,6 +90,12 @@ enum MemoryFunctions {
         
         return alarmsArray
     }
+    
+    static func saveAlarmsToUserDefaults(_ alarmsArray: [Alarm]) {
+        let dataArray = archiveAlarmsToDataArray(alarmsArray)
+        let archivedData = archiveDataArray(dataArray)
+        saveAlarmsDataToMemory(alarmData: archivedData)
+    }
 }
 
 extension MemoryFunctions {

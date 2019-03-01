@@ -95,9 +95,7 @@ class AlarmSettingsViewController: UIViewController {
 //            print(error.localizedDescription)
 //        }
         
-        let dataArray = MemoryFunctions.archiveAlarmsToDataArray(alarmsArray)
-        let archivedData = MemoryFunctions.archiveDataArray(dataArray)
-        MemoryFunctions.saveAlarmsDataToMemory(alarmData: archivedData)
+        MemoryFunctions.saveAlarmsToUserDefaults(alarmsArray)
 
     }
     
