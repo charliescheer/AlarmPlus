@@ -51,9 +51,7 @@ extension AlarmTableViewController {
         }
         
         setupCellStyle(cell: cell)
-        let alarmTime = alarmsArray[indexPath.row].schedule.getAlarmTimes()
-        
-        cell.scheduledTimeLabel.text = "\(String(alarmTime[0])) : \(String(alarmTime[1]))"
+        cell.scheduledTimeLabel.text = alarmsArray[indexPath.row].schedule.getAlarmTimeString()
         
         
         return cell

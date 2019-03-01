@@ -68,6 +68,26 @@ class Schedule: Codable {
         }
     }
     
+    func getAlarmTimeString() -> String {
+        var timeString : String = ""
+        
+        if self.alarmTime[0] <= 12 {
+            timeString.append(String(self.alarmTime[0]))
+        } else {
+            timeString.append(String(self.alarmTime[0]-12))
+        }
+        
+        timeString.append(" : ")
+        
+        if self.alarmTime[1] > 9 {
+            timeString.append(String(self.alarmTime[1]))
+        } else {
+            timeString.append("0" + String(self.alarmTime[1]))
+        }
+        
+        return timeString
+    }
+    
     func addDateToActiveAlarms(_ day : Int) {
         var dateComponents = DateComponents()
         var calendar = Calendar(identifier: .gregorian)
@@ -118,7 +138,6 @@ class Schedule: Codable {
         
         newDateComponents.hour = alarmTime[0]
         newDateComponents.minute = alarmTime[1]
-
         
         return newDateComponents
     }
