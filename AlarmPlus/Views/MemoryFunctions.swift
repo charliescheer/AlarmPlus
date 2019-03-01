@@ -26,70 +26,8 @@ enum MemoryFunctions {
         return alarmsArray
     }
     
-    static func unarchiveAlarmArrayData(_ data : Data) throws -> [Alarm] {
-        var alarmsArray : [Alarm] = []
-        
-        do {
-            guard let unarchivedData = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [Alarm.self], from: data) as? Data else {
-                return alarmsArray
-            }
-            let decoder = PropertyListDecoder()
-            
-            let decodedArray = try decoder.decode(Alarm.self, from: unarchivedData) as? [Alarm]
-            
-            if let alarmsArray = decodedArray {
-                return alarmsArray
-            } else {
-                return alarmsArray
-            }
-            
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        return alarmsArray
-    }
-    
-    static func convertAlarmArrayToData(alarmArray : [Alarm]) throws -> Data{
-        var data = Data()
-        
-        let tempData = try NSKeyedArchiver.archivedData(withRootObject: alarmArray, requiringSecureCoding: false)
-        
-        data = tempData
-        
-        return data
-    }
-    
     static func saveAlarmsDataToMemory(alarmData: Data) {
         UserDefaults.standard.set(alarmData, forKey: defaults.savedAlarms)
-    }
-    
-    static func archiveWithKeyedArchiver(object: Any) -> Data {
-        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-        
-        archiver.outputFormat = .binary
-        
-        archiver.encode(object, forKey: "class")
-        
-        archiver.finishEncoding()
-        
-        let data = archiver.encodedData
-        
-        
-        return data
-    }
-    
-    static func unarchiveWithKeyedArchiver(archivedData: Data) throws -> Any {
-        var test = TestClass()
-        let unarchiver = try NSKeyedUnarchiver(forReadingFrom: archivedData)
-        
-        guard let data = unarchiver.decodeObject(forKey: "class") as? TestClass else {
-            return test
-        }
-        
-        test = data
-        
-        return test
     }
     
     static func archiveAlarmsToDataArray(_ alarmsArray : [Alarm]) -> [Data] {
