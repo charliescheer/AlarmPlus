@@ -18,9 +18,7 @@ enum MemoryFunctions {
         }
 
        let dataArray = unarchiveDataArray(savedData)
-        print(dataArray)
         let decodedAlarmsArray = decodeAlarmsFromDataArray(dataArray)
-        print(decodedAlarmsArray)
         alarmsArray = decodedAlarmsArray
         
         return alarmsArray

@@ -98,7 +98,7 @@ class AlarmSettingsViewController: UIViewController {
         let dataArray = MemoryFunctions.archiveAlarmsToDataArray(alarmsArray)
         let archivedData = MemoryFunctions.archiveDataArray(dataArray)
         MemoryFunctions.saveAlarmsDataToMemory(alarmData: archivedData)
-        print(UserDefaults.standard.data(forKey: MemoryFunctions.defaults.savedAlarms))
+
     }
     
     //Function gets the information from existing alarm and pupulates it on the view
@@ -126,7 +126,6 @@ class AlarmSettingsViewController: UIViewController {
                 }
             }
         }
-        print(alarmCurrentDays)
         datePicker.date = calendar.date(from: dateCompenents)!
     }
     

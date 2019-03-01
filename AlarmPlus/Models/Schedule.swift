@@ -116,8 +116,7 @@ class Schedule: Codable {
         dateComponents.year = nextScheduleDateComponents.year
         
         activeAlarms[day] = dateComponents.date
-        
-        print(dateComponents)
+
     }
     
     //returns an int that represents what day of the week it is currently.

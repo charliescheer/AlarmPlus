@@ -39,9 +39,6 @@ class AlarmTableViewController: UITableViewController {
     }
     
     
-    //TO DO - Save the array of alarms
-    //TO DO - Possibly change the save savedAlarms userdefaults to send and receive from the system?
-    
 }
 
 extension AlarmTableViewController {
