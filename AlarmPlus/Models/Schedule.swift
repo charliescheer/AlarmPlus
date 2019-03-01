@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Schedule: NSObject {
+class Schedule: Codable {
     private var alarmTime: [Int] = []
     private var repeatAlarm: Bool = false
     private var daysActive: [Int] = []

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA10F71421FFFAEA0001F54A /* testClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA10F71321FFFAEA0001F54A /* testClass.swift */; };
 		BA7DD23E21BDB48C0081849B /* AlarmSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA7DD23D21BDB48C0081849B /* AlarmSettings.storyboard */; };
 		BA7DD24121BDD4290081849B /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7DD24021BDD4290081849B /* StoryboardLoadable.swift */; };
 		BA911DA021B092F60033A753 /* AlarmSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA911D9F21B092F60033A753 /* AlarmSettingsViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA10F71321FFFAEA0001F54A /* testClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testClass.swift; sourceTree = "<group>"; };
 		BA7DD23D21BDB48C0081849B /* AlarmSettings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AlarmSettings.storyboard; sourceTree = "<group>"; };
 		BA7DD24021BDD4290081849B /* StoryboardLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
 		BA911D9F21B092F60033A753 /* AlarmSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingsViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				BABA18E92197A44D00B03CCD /* Alert.swift */,
 				BABA18E72197A42500B03CCD /* Snooze.swift */,
 				BAE4D8C021AF4852004A70AB /* Schedule.swift */,
+				BA10F71321FFFAEA0001F54A /* testClass.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				BADE982221E2574F005D6965 /* Calendar+Helpers.swift in Sources */,
 				BADE982421E25773005D6965 /* DateComponents+Helpers.swift in Sources */,
 				BAE4D8C121AF4852004A70AB /* Schedule.swift in Sources */,
+				BA10F71421FFFAEA0001F54A /* testClass.swift in Sources */,
 				BABA18D62197911100B03CCD /* AlarmTableViewController.swift in Sources */,
 				BA7DD24121BDD4290081849B /* StoryboardLoadable.swift in Sources */,
 				BA911DA021B092F60033A753 /* AlarmSettingsViewController.swift in Sources */,

@@ -13,16 +13,15 @@ enum MemoryFunctions {
     static func getSavedAlarmsArray() -> [Alarm] {
         var alarmsArray : [Alarm] = []
         
-        guard let arrayData = UserDefaults.standard.data(forKey: defaults.savedAlarms) else {
+        guard let savedData = UserDefaults.standard.data(forKey: defaults.savedAlarms) else {
             return alarmsArray
         }
-        
-        do {
-            let unarchivedArray = try unarchiveAlarmArrayData(arrayData)
-            alarmsArray = unarchivedArray
-        } catch {
-            print(error.localizedDescription)
-        }
+
+       let dataArray = unarchiveDataArray(savedData)
+        print(dataArray)
+        let decodedAlarmsArray = decodeAlarmsFromDataArray(dataArray)
+        print(decodedAlarmsArray)
+        alarmsArray = decodedAlarmsArray
         
         return alarmsArray
     }
@@ -31,11 +30,19 @@ enum MemoryFunctions {
         var alarmsArray : [Alarm] = []
         
         do {
-            let tempArray = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Alarm]
-            
-            if let unarchrivedArray = tempArray {
-                alarmsArray = unarchrivedArray
+            guard let unarchivedData = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [Alarm.self], from: data) as? Data else {
+                return alarmsArray
             }
+            let decoder = PropertyListDecoder()
+            
+            let decodedArray = try decoder.decode(Alarm.self, from: unarchivedData) as? [Alarm]
+            
+            if let alarmsArray = decodedArray {
+                return alarmsArray
+            } else {
+                return alarmsArray
+            }
+            
         } catch {
             print(error.localizedDescription)
         }
@@ -43,7 +50,7 @@ enum MemoryFunctions {
         return alarmsArray
     }
     
-    static func convertAlarmArrayToDate(alarmArray : [Alarm]) throws -> Data{
+    static func convertAlarmArrayToData(alarmArray : [Alarm]) throws -> Data{
         var data = Data()
         
         let tempData = try NSKeyedArchiver.archivedData(withRootObject: alarmArray, requiringSecureCoding: false)
@@ -57,8 +64,100 @@ enum MemoryFunctions {
         UserDefaults.standard.set(alarmData, forKey: defaults.savedAlarms)
     }
     
+    static func archiveWithKeyedArchiver(object: Any) -> Data {
+        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+        
+        archiver.outputFormat = .binary
+        
+        archiver.encode(object, forKey: "class")
+        
+        archiver.finishEncoding()
+        
+        let data = archiver.encodedData
+        
+        
+        return data
+    }
+    
+    static func unarchiveWithKeyedArchiver(archivedData: Data) throws -> Any {
+        var test = TestClass()
+        let unarchiver = try NSKeyedUnarchiver(forReadingFrom: archivedData)
+        
+        guard let data = unarchiver.decodeObject(forKey: "class") as? TestClass else {
+            return test
+        }
+        
+        test = data
+        
+        return test
+    }
+    
+    static func archiveAlarmsToDataArray(_ alarmsArray : [Alarm]) -> [Data] {
+        var dataArray : [Data] = []
+        
+        for alarm in alarmsArray {
+            let encoder = PropertyListEncoder()
+            do {
+                let alarmData = try encoder.encode(alarm)
+                dataArray.append(alarmData)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        return dataArray
+    }
+    
+    static func archiveDataArray(_ dataArray : [Data]) -> Data {
+        var data = Data()
+        
+        do {
+            let archivedData = try NSKeyedArchiver.archivedData(withRootObject: dataArray, requiringSecureCoding: false)
+            data = archivedData
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return data
+    }
+    
+    static func unarchiveDataArray(_ data : Data) -> [Data] {
+        var dataArray : [Data] = []
+        
+        do {
+            let decodedArray = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Data]
+            
+            if let arrayData = decodedArray{
+                dataArray = arrayData
+            }
+            
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+        return dataArray
+    }
+    
+    static func decodeAlarmsFromDataArray(_ dataArray : [Data]) -> [Alarm] {
+        var alarmsArray : [Alarm] = []
+        
+        let decoder = PropertyListDecoder()
+        
+        for data in dataArray {
+            do {
+                let decodedAlarm = try decoder.decode(Alarm.self, from: data)
+                alarmsArray.append(decodedAlarm)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        return alarmsArray
+    }
 }
 
-enum defaults {
-    static let savedAlarms = "savedAlarms"
+extension MemoryFunctions {
+    enum defaults {
+        static let savedAlarms = "savedAlarms"
+    }
 }

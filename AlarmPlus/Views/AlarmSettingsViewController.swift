@@ -69,11 +69,14 @@ class AlarmSettingsViewController: UIViewController {
     
     @objc func rightButtonAction(sender: UIBarButtonItem) {
         //Save UIBarbutton item actions
+        var alarmsArray = MemoryFunctions.getSavedAlarmsArray()
+        
         guard let currentAlarm = alarm else {
             return
         }
         
         let (setHour, setMinute) = getUserSetTime(datePicker: datePicker)
+        
         currentAlarm.schedule.setAlarmTime(hour: setHour, minute: setMinute)
 
         
@@ -82,13 +85,20 @@ class AlarmSettingsViewController: UIViewController {
         
         currentAlarm.schedule.setActiveAlarms()
         
-        do {
-            let convertedData = try MemoryFunctions.convertAlarmArrayToDate()
-        } catch {
-            print(error.localizedDescription)
-        }
+        alarmsArray.append(currentAlarm)
+
+//        let data = MemoryFunctions.archiveWithKeyedArchiver(object: alarmsArray)
+//
+//        do {
+//            print(try MemoryFunctions.unarchiveAlarmArrayData(data))
+//        } catch {
+//            print(error.localizedDescription)
+//        }
         
-        print(currentAlarm.schedule.getAlarms())
+        let dataArray = MemoryFunctions.archiveAlarmsToDataArray(alarmsArray)
+        let archivedData = MemoryFunctions.archiveDataArray(dataArray)
+        MemoryFunctions.saveAlarmsDataToMemory(alarmData: archivedData)
+        print(UserDefaults.standard.data(forKey: MemoryFunctions.defaults.savedAlarms))
     }
     
     //Function gets the information from existing alarm and pupulates it on the view
@@ -98,7 +108,7 @@ class AlarmSettingsViewController: UIViewController {
     
     //Function creates a new alarm object and sets it with some default data
     func setupNewAlarmInfo() {
-        alarm = Alarm()
+        alarm = Alarm(snooze: Snooze(), alert: Alert(), schedule: Schedule())
         
         let calendar = Calendar(identifier: .gregorian)
         let date = Date()

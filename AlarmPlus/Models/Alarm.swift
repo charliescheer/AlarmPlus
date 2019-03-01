@@ -8,10 +8,18 @@
 
 import UIKit
 
-class Alarm: NSObject {
+class Alarm: Codable {
+
+
     var snooze = Snooze()
     var alert = Alert()
     var schedule = Schedule()
+    
+    init(snooze: Snooze, alert: Alert, schedule: Schedule) {
+        self.snooze = snooze
+        self.alert = alert
+        self.schedule = schedule
+    }
     
     func getSnooze() -> Snooze  {
         return snooze

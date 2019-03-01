@@ -25,30 +25,18 @@ class AlarmTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getSavedAlarmsFromMemory()
         setupView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        saveSavedAlarmsToMemory()
+        alarmsArray = MemoryFunctions.getSavedAlarmsArray()
+        tableView.reloadData()
     }
     
     func setupView() {
         view.backgroundColor = definedColors.backgroundColor
         table.rowHeight = 95
     }
-    
-    func getSavedAlarmsFromMemory() {
-        let userDefaults = UserDefaults()
-        if let savedAlarms = userDefaults.array(forKey: defaults.saved) as? [Date] {
-            scheduledAlarmEvents = savedAlarms
-        }
-        
-        //TO DO - Get the array of alarms
-        //TO DO - Possibly change the get savedAlarms userdefaults to send and receive from the system?
-    
-    }
-    
     
     
     //TO DO - Save the array of alarms
@@ -63,6 +51,10 @@ extension AlarmTableViewController {
         }
         
         setupCellStyle(cell: cell)
+        let alarmTime = alarmsArray[indexPath.row].schedule.getAlarmTimes()
+        
+        cell.scheduledTimeLabel.text = "\(String(alarmTime[0])) : \(String(alarmTime[1]))"
+        
         
         return cell
         
