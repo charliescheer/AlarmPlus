@@ -85,6 +85,12 @@ class Schedule: Codable {
             timeString.append("0" + String(self.alarmTime[1]))
         }
         
+        if self.alarmTime[0] < 12 {
+            timeString.append(" am")
+        } else {
+            timeString.append(" pm")
+        }
+        
         return timeString
     }
     
