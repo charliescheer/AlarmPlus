@@ -57,7 +57,7 @@ class AlarmSettingsViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        print(alarm?.schedule.getAlarmTimeString())
     }
     
     
@@ -86,14 +86,6 @@ class AlarmSettingsViewController: UIViewController {
         currentAlarm.schedule.setActiveAlarms()
         
         alarmsArray.append(currentAlarm)
-
-//        let data = MemoryFunctions.archiveWithKeyedArchiver(object: alarmsArray)
-//
-//        do {
-//            print(try MemoryFunctions.unarchiveAlarmArrayData(data))
-//        } catch {
-//            print(error.localizedDescription)
-//        }
         
         MemoryFunctions.saveAlarmsToUserDefaults(alarmsArray)
 

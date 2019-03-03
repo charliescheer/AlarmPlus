@@ -69,6 +69,14 @@ extension AlarmTableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = AlarmSettingsViewController.loadViewController()
+        
+        controller.alarm = alarmsArray[indexPath.row]
+        
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             self.alarmsArray.remove(at: indexPath.row)
@@ -77,21 +85,6 @@ extension AlarmTableViewController {
      
         return [delete]
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == constants.alarmSettingsSegue {
-//            let settingsVC = segue.destination as? AlarmTableViewController
-//
-//            guard let alarmCell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: alarmCell) else {
-//                return
-//            }
-    
-            //TO DO - Pass the selected alarm to the settings View controller
-            
-//        }
-//    }
-    
-    
 }
 
 extension AlarmTableViewController {
