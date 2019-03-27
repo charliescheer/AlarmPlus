@@ -10,7 +10,7 @@ import UIKit
 
 class AlarmSettingsViewController: UIViewController {
     var alarm : Alarm?
-    var alarmCurrentDays : [Int] = []
+    var selectedDays : [Int] = []
     var daySelectButtonsArray : [UIButton] = []
     
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -27,20 +27,22 @@ class AlarmSettingsViewController: UIViewController {
         guard let buttonPressed = sender as? UIButton else {
             return
         }
+        
         if buttonPressed.isSelected {
             //The day that was selected is currently active in the alarm
             
             buttonPressed.isSelected = false
-            if alarmCurrentDays.contains(buttonPressed.tag) {
-                let fAlarmCurrentDays = alarmCurrentDays.filter {$0 != buttonPressed.tag}
-                alarmCurrentDays = fAlarmCurrentDays
+            if selectedDays.contains(buttonPressed.tag) {
+                let fAlarmCurrentDays = selectedDays.filter {$0 != buttonPressed.tag}
+                selectedDays = fAlarmCurrentDays
+                print(selectedDays)
             }
         } else {
             //The day is pressed and currently is not active
             
             buttonPressed.isSelected = true
-            if alarmCurrentDays.contains(buttonPressed.tag) == false {
-                alarmCurrentDays.append(buttonPressed.tag)
+            if selectedDays.contains(buttonPressed.tag) == false {
+                selectedDays.append(buttonPressed.tag)
             }
         }
     }
@@ -48,15 +50,18 @@ class AlarmSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        
-        if alarm == nil {
-            setupNewAlarmInfo()
-        } else {
-            setupAlarmInfo()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        if alarm == nil {
+            setupNewAlarmInfo()
+            print("new alarm")
+        } else {
+            setupAlarmInfo()
+            print("old alarm")
+            print(alarm?.schedule.getAlarmDays())
+        }
         print(alarm?.schedule.getAlarmTimeString())
     }
     
@@ -70,35 +75,58 @@ class AlarmSettingsViewController: UIViewController {
     @objc func rightButtonAction(sender: UIBarButtonItem) {
         //Save UIBarbutton item actions
         var alarmsArray = MemoryFunctions.getSavedAlarmsArray()
-        
-        guard let currentAlarm = alarm else {
-            return
-        }
-        
         let (setHour, setMinute) = getUserSetTime(datePicker: datePicker)
         
-        currentAlarm.schedule.setAlarmTime(hour: setHour, minute: setMinute)
-
+        if let currentAlarm = alarm {
+            //If there is an alarm already update exsisting alarm
         
-        currentAlarm.schedule.setDayaActive(daysArray: alarmCurrentDays)
-
-        
-        currentAlarm.schedule.setActiveAlarms()
-        
-        alarmsArray.append(currentAlarm)
-        
-        MemoryFunctions.saveAlarmsToUserDefaults(alarmsArray)
+            currentAlarm.schedule.setAlarmTime(hour: setHour, minute: setMinute)
+            
+            currentAlarm.schedule.setDaysActive(daysArray: selectedDays)
+            
+            currentAlarm.schedule.setActiveAlarms()
+            
+            alarmsArray.append(currentAlarm)
+            
+            MemoryFunctions.saveAlarmsToUserDefaults(alarmsArray)
+        } else {
+            //if the alarm is nil create a new alarm with the current settings
+            let newAlarm = Alarm(hour: setHour, minute: setMinute)
+            
+            newAlarm.schedule.setDaysActive(daysArray: selectedDays)
+            newAlarm.schedule.setActiveAlarms()
+            
+            alarmsArray.append(newAlarm)
+            
+            MemoryFunctions.saveAlarmsToUserDefaults(alarmsArray)
+        }
 
     }
     
     //Function gets the information from existing alarm and pupulates it on the view
     func setupAlarmInfo() {
+        guard let currentAlarm = alarm else {
+            return
+        }
         
+        datePicker.date = currentAlarm.schedule.getAlarmDate()
+        
+        let alarmDaysActive = currentAlarm.schedule.getAlarmDays()
+        selectedDays = alarmDaysActive
+        
+        for day in alarmDaysActive {
+            for dayButton in daySelectButtonsArray {
+                if day == dayButton.tag {
+                    dayButton.isSelected = true
+                    
+                }
+            }
+        }
     }
     
     //Function creates a new alarm object and sets it with some default data
     func setupNewAlarmInfo() {
-        alarm = Alarm(snooze: Snooze(), alert: Alert(), schedule: Schedule())
+        alarm = Alarm(hour: 12, minute: 00)
         
         let calendar = Calendar(identifier: .gregorian)
         let date = Date()
@@ -108,7 +136,7 @@ class AlarmSettingsViewController: UIViewController {
         dateCompenents.minute = 0
         
         if let todaysDayOfTheWeekIndex = dateCompenents.weekday {
-            alarmCurrentDays.append(todaysDayOfTheWeekIndex)
+            selectedDays.append(todaysDayOfTheWeekIndex)
             
             for dayButton in daySelectButtonsArray {
                 if dayButton.tag == todaysDayOfTheWeekIndex {

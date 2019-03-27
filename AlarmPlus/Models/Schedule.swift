@@ -14,7 +14,7 @@ class Schedule: Codable {
     private var daysActive: [Int] = []
     private var alarmEnabled: Bool = true
     private var activeAlarms: [Int : Date] = [ : ]
-    
+    private var alarmDate = Date()
     
     func enableRepeat() {
         self.repeatAlarm = true
@@ -40,8 +40,12 @@ class Schedule: Codable {
         return alarmEnabled
     }
     
-    func setDayaActive(daysArray: [Int]) {
+    func setDaysActive(daysArray: [Int]) {
         self.daysActive = daysArray
+    }
+    
+    func addToDaysActive(dayIndex: Int) {
+        self.daysActive.append(dayIndex)
     }
     
     func getAlarmDays() -> [Int] {
@@ -68,27 +72,37 @@ class Schedule: Codable {
         }
     }
     
+    func setAlarmDate(with date : Date) {
+        alarmDate = date
+    }
+    
+    func getAlarmDate() -> Date {
+        return alarmDate
+    }
+    
     func getAlarmTimeString() -> String {
         var timeString : String = ""
         
-        if self.alarmTime[0] <= 12 {
-            timeString.append(String(self.alarmTime[0]))
-        } else {
-            timeString.append(String(self.alarmTime[0]-12))
-        }
-        
-        timeString.append(" : ")
-        
-        if self.alarmTime[1] > 9 {
-            timeString.append(String(self.alarmTime[1]))
-        } else {
-            timeString.append("0" + String(self.alarmTime[1]))
-        }
-        
-        if self.alarmTime[0] < 12 {
-            timeString.append(" am")
-        } else {
-            timeString.append(" pm")
+        if self.alarmTime.count != 0 {
+            if self.alarmTime[0] <= 12 {
+                timeString.append(String(self.alarmTime[0]))
+            } else {
+                timeString.append(String(self.alarmTime[0]-12))
+            }
+            
+            timeString.append(" : ")
+            
+            if self.alarmTime[1] > 9 {
+                timeString.append(String(self.alarmTime[1]))
+            } else {
+                timeString.append("0" + String(self.alarmTime[1]))
+            }
+            
+            if self.alarmTime[0] < 12 {
+                timeString.append(" am")
+            } else {
+                timeString.append(" pm")
+            }
         }
         
         return timeString
@@ -116,6 +130,10 @@ class Schedule: Codable {
         dateComponents.year = nextScheduleDateComponents.year
         
         activeAlarms[day] = dateComponents.date
+        
+        if let dateComponentsDate = dateComponents.date {
+            setAlarmDate(with: dateComponentsDate)
+        }
 
     }
     

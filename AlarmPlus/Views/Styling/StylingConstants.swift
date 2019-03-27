@@ -12,7 +12,7 @@ enum definedColors {
     static let backgroundColor = UIColor.gray
     static let defaultFontColor = UIColor.white
     static let activatedFrontColor = UIColor.white
-    static let deactivatedFontColor = UIColor.darkGray
+    static let deactivatedFontColor = UIColor.darkGray.withAlphaComponent(0.5)
 }
 
 enum definedSizes {

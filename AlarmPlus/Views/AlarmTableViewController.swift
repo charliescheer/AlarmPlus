@@ -52,11 +52,30 @@ extension AlarmTableViewController {
             return UITableViewCell()
         }
         
+        
         setupCellStyle(cell: cell)
         cell.scheduledTimeLabel.text = alarmsArray[indexPath.row].schedule.getAlarmTimeString()
+        displayCellData(cell: cell, indexPath: indexPath)
         
         
         return cell
+        
+    }
+    
+    func displayCellData(cell: AlarmTableViewCell, indexPath: IndexPath) {
+        let labelArray = [cell.sundayLabel, cell.mondayLabel, cell.tuesdayLabel, cell.wednesdayLabel, cell.thursdayLabel, cell.fridayLabel, cell.saturdayLabel]
+        
+        cell.scheduledTimeLabel.text = alarmsArray[indexPath.row].schedule.getAlarmTimeString()
+        
+        for day in alarmsArray[indexPath.row].schedule.getAlarmDays() {
+            for label in labelArray {
+                if day == label!.tag {
+                    print(day, label?.tag)
+                    label?.isHighlighted = true
+                    print(label?.isHighlighted)
+                }
+            }
+        }
         
     }
     
@@ -65,7 +84,14 @@ extension AlarmTableViewController {
     }
     
     func setupCellStyle(cell: AlarmTableViewCell) {
+        let labelArray = [cell.sundayLabel, cell.mondayLabel, cell.tuesdayLabel, cell.wednesdayLabel, cell.thursdayLabel, cell.fridayLabel, cell.saturdayLabel]
         cell.backgroundColor = definedColors.backgroundColor
+        
+        for label in labelArray {
+            label?.textColor = definedColors.deactivatedFontColor
+            label?.highlightedTextColor = definedColors.activatedFrontColor
+        }
+        
         
     }
     
