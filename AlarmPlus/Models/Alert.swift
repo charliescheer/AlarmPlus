@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Alert: NSObject {
+class Alert: Codable {
     private var fadeInEnabled : Bool = false
     private var alertVolume : Double?
     

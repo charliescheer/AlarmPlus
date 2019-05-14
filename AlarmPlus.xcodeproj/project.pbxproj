@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA7DD23E21BDB48C0081849B /* AlarmSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA7DD23D21BDB48C0081849B /* AlarmSettings.storyboard */; };
+		BA7DD24121BDD4290081849B /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7DD24021BDD4290081849B /* StoryboardLoadable.swift */; };
+		BA911DA021B092F60033A753 /* AlarmSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA911D9F21B092F60033A753 /* AlarmSettingsViewController.swift */; };
+		BA911DA221B0A5680033A753 /* MemoryFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA911DA121B0A5680033A753 /* MemoryFunctions.swift */; };
 		BABA18D42197911100B03CCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18D32197911100B03CCD /* AppDelegate.swift */; };
 		BABA18D62197911100B03CCD /* AlarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18D52197911100B03CCD /* AlarmTableViewController.swift */; };
 		BABA18D92197911100B03CCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BABA18D72197911100B03CCD /* Main.storyboard */; };
@@ -15,10 +19,18 @@
 		BABA18E621979A2C00B03CCD /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18E521979A2C00B03CCD /* Alarm.swift */; };
 		BABA18E82197A42500B03CCD /* Snooze.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18E72197A42500B03CCD /* Snooze.swift */; };
 		BABA18EA2197A44D00B03CCD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABA18E92197A44D00B03CCD /* Alert.swift */; };
+		BADE982221E2574F005D6965 /* Calendar+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADE982121E2574F005D6965 /* Calendar+Helpers.swift */; };
+		BADE982421E25773005D6965 /* DateComponents+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADE982321E25773005D6965 /* DateComponents+Helpers.swift */; };
 		BAE4D8C121AF4852004A70AB /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4D8C021AF4852004A70AB /* Schedule.swift */; };
+		BAE4D8C521AF4CBE004A70AB /* StylingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4D8C421AF4CBE004A70AB /* StylingConstants.swift */; };
+		BAE4D8C721AF56C4004A70AB /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4D8C621AF56C4004A70AB /* AlarmTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA7DD23D21BDB48C0081849B /* AlarmSettings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AlarmSettings.storyboard; sourceTree = "<group>"; };
+		BA7DD24021BDD4290081849B /* StoryboardLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
+		BA911D9F21B092F60033A753 /* AlarmSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingsViewController.swift; sourceTree = "<group>"; };
+		BA911DA121B0A5680033A753 /* MemoryFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryFunctions.swift; sourceTree = "<group>"; };
 		BABA18D02197911100B03CCD /* AlarmPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BABA18D32197911100B03CCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BABA18D52197911100B03CCD /* AlarmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewController.swift; sourceTree = "<group>"; };
@@ -29,7 +41,11 @@
 		BABA18E521979A2C00B03CCD /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		BABA18E72197A42500B03CCD /* Snooze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snooze.swift; sourceTree = "<group>"; };
 		BABA18E92197A44D00B03CCD /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		BADE982121E2574F005D6965 /* Calendar+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+Helpers.swift"; sourceTree = "<group>"; };
+		BADE982321E25773005D6965 /* DateComponents+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents+Helpers.swift"; sourceTree = "<group>"; };
 		BAE4D8C021AF4852004A70AB /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		BAE4D8C421AF4CBE004A70AB /* StylingConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StylingConstants.swift; sourceTree = "<group>"; };
+		BAE4D8C621AF56C4004A70AB /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +70,26 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		BA7DD23F21BDD4180081849B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BA911DA121B0A5680033A753 /* MemoryFunctions.swift */,
+				BA7DD24021BDD4290081849B /* StoryboardLoadable.swift */,
+				BADE982121E2574F005D6965 /* Calendar+Helpers.swift */,
+				BADE982321E25773005D6965 /* DateComponents+Helpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BA7DD24221BDD8440081849B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				BABA18D72197911100B03CCD /* Main.storyboard */,
+				BA7DD23D21BDB48C0081849B /* AlarmSettings.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		BABA18C72197911100B03CCD = {
 			isa = PBXGroup;
 			children = (
@@ -73,8 +109,11 @@
 		BABA18D22197911100B03CCD /* AlarmPlus */ = {
 			isa = PBXGroup;
 			children = (
-				BAE4D8BF21AF45FE004A70AB /* Views */,
+				BA7DD24221BDD8440081849B /* Storyboards */,
+				BA7DD23F21BDD4180081849B /* Helpers */,
+				BAE4D8C321AF4CA0004A70AB /* Styling */,
 				BA2564B12197B65300C712C2 /* Models */,
+				BAE4D8BF21AF45FE004A70AB /* Views */,
 				BABA18D32197911100B03CCD /* AppDelegate.swift */,
 				BABA18DA2197911300B03CCD /* Assets.xcassets */,
 				BABA18DC2197911300B03CCD /* LaunchScreen.storyboard */,
@@ -86,10 +125,19 @@
 		BAE4D8BF21AF45FE004A70AB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BABA18D72197911100B03CCD /* Main.storyboard */,
+				BA911D9F21B092F60033A753 /* AlarmSettingsViewController.swift */,
 				BABA18D52197911100B03CCD /* AlarmTableViewController.swift */,
+				BAE4D8C621AF56C4004A70AB /* AlarmTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BAE4D8C321AF4CA0004A70AB /* Styling */ = {
+			isa = PBXGroup;
+			children = (
+				BAE4D8C421AF4CBE004A70AB /* StylingConstants.swift */,
+			);
+			path = Styling;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +200,7 @@
 			files = (
 				BABA18DE2197911300B03CCD /* LaunchScreen.storyboard in Resources */,
 				BABA18DB2197911300B03CCD /* Assets.xcassets in Resources */,
+				BA7DD23E21BDB48C0081849B /* AlarmSettings.storyboard in Resources */,
 				BABA18D92197911100B03CCD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -163,8 +212,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAE4D8C521AF4CBE004A70AB /* StylingConstants.swift in Sources */,
+				BADE982221E2574F005D6965 /* Calendar+Helpers.swift in Sources */,
+				BADE982421E25773005D6965 /* DateComponents+Helpers.swift in Sources */,
 				BAE4D8C121AF4852004A70AB /* Schedule.swift in Sources */,
 				BABA18D62197911100B03CCD /* AlarmTableViewController.swift in Sources */,
+				BA7DD24121BDD4290081849B /* StoryboardLoadable.swift in Sources */,
+				BA911DA021B092F60033A753 /* AlarmSettingsViewController.swift in Sources */,
+				BA911DA221B0A5680033A753 /* MemoryFunctions.swift in Sources */,
+				BAE4D8C721AF56C4004A70AB /* AlarmTableViewCell.swift in Sources */,
 				BABA18E82197A42500B03CCD /* Snooze.swift in Sources */,
 				BABA18D42197911100B03CCD /* AppDelegate.swift in Sources */,
 				BABA18EA2197A44D00B03CCD /* Alert.swift in Sources */,

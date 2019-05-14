@@ -8,13 +8,13 @@
 
 import UIKit
 
-class Schedule: NSObject {
+class Schedule: Codable {
     private var alarmTime: [Int] = []
     private var repeatAlarm: Bool = false
     private var daysActive: [Int] = []
     private var alarmEnabled: Bool = true
     private var activeAlarms: [Int : Date] = [ : ]
-    
+    private var alarmDate = Date()
     
     func enableRepeat() {
         self.repeatAlarm = true
@@ -40,38 +40,83 @@ class Schedule: NSObject {
         return alarmEnabled
     }
     
-    func addDayToAlarm(daysArray: [Int]) {
+    func setDaysActive(daysArray: [Int]) {
         self.daysActive = daysArray
+    }
+    
+    func addToDaysActive(dayIndex: Int) {
+        self.daysActive.append(dayIndex)
     }
     
     func getAlarmDays() -> [Int] {
         return self.daysActive
     }
     
+    func getAlarmTimes() -> [Int] {
+        return self.alarmTime
+    }
+    
     func setAlarmTime(hour : Int, minute: Int) {
-        self.alarmTime.append(hour)
-        self.alarmTime.append(minute)
+        self.alarmTime = [hour, minute]
     }
     
     func getAlarms() -> [Int : Date] {
         return activeAlarms
     }
     
-    func setActiveAlarams() {
+    func setActiveAlarms() {
         //adds all of the different scheduled alarms to the activeAlarms array
+        self.activeAlarms = [ : ]
         for day in daysActive {
             addDateToActiveAlarms(day)
         }
     }
     
+    func setAlarmDate(with date : Date) {
+        alarmDate = date
+    }
+    
+    func getAlarmDate() -> Date {
+        return alarmDate
+    }
+    
+    func getAlarmTimeString() -> String {
+        var timeString : String = ""
+        
+        if self.alarmTime.count != 0 {
+            if self.alarmTime[0] <= 12 {
+                timeString.append(String(self.alarmTime[0]))
+            } else {
+                timeString.append(String(self.alarmTime[0]-12))
+            }
+            
+            timeString.append(" : ")
+            
+            if self.alarmTime[1] > 9 {
+                timeString.append(String(self.alarmTime[1]))
+            } else {
+                timeString.append("0" + String(self.alarmTime[1]))
+            }
+            
+            if self.alarmTime[0] < 12 {
+                timeString.append(" am")
+            } else {
+                timeString.append(" pm")
+            }
+        }
+        
+        return timeString
+    }
+    
     func addDateToActiveAlarms(_ day : Int) {
         var dateComponents = DateComponents()
-        let calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .gregorian)
+        let timeZone = TimeZone.current
+        calendar.timeZone = timeZone
         
         dateComponents.calendar = calendar
-        
         //set time for the new alarm
-        if alarmTime.count == 1 {
+        if alarmTime.count == 2 {
             dateComponents = setHoursAndMinutesForNewAlarm(dateComponents)
         } else {
             print("Time is out of range")
@@ -85,10 +130,35 @@ class Schedule: NSObject {
         dateComponents.year = nextScheduleDateComponents.year
         
         activeAlarms[day] = dateComponents.date
+        
+        if let dateComponentsDate = dateComponents.date {
+            setAlarmDate(with: dateComponentsDate)
+        }
+
+    }
+    
+    //returns an int that represents what day of the week it is currently.
+    //Sunday = 1 and increases by one till Saturday = 7
+    //If a date can't be obtained will return 1 - Sunday
+    func getTodaysDayIndex() -> Int {
+        var todaysDayIndex = 0
+        let newDate = Date()
+        
+        let calendar = Calendar(identifier: .gregorian)
+        let todaysDateCompenents = calendar.dateComponents(in: .current, from: newDate)
+        
+        if let dayIndex = todaysDateCompenents.day {
+            todaysDayIndex = dayIndex
+        } else {
+            todaysDayIndex = 1
+        }
+        
+        return todaysDayIndex
     }
     
     private func setHoursAndMinutesForNewAlarm(_ dateComponents: DateComponents) -> DateComponents{
         var newDateComponents = dateComponents
+        
         newDateComponents.hour = alarmTime[0]
         newDateComponents.minute = alarmTime[1]
         
@@ -103,7 +173,6 @@ class Schedule: NSObject {
         let todaysDateCompenents = calendar.dateComponents(in: .current, from: newDate)
         
         if let todaysDayOfTheWeek = todaysDateCompenents.weekday {
-            print(dayOfTheWeek)
             if dayOfTheWeek == todaysDayOfTheWeek {
                 //newDate is already set to today's date, make no changes
             } else if dayOfTheWeek < todaysDayOfTheWeek {
