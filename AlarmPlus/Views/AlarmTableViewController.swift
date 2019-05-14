@@ -15,7 +15,7 @@ class AlarmTableViewController: UITableViewController {
     @IBOutlet var table: UITableView!
     
     @IBAction func editWasPressed(_ sender: Any) {
-        
+
     }
     
     @IBAction func addWasPressed(_ sender: Any) {
@@ -26,11 +26,16 @@ class AlarmTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         alarmsArray = MemoryFunctions.getSavedAlarmsArray()
         tableView.reloadData()
+        for alarm in alarmsArray {
+            print(alarm.schedule.getAlarmTimeString())
+            print(alarm.schedule.getAlarmDate())
+        }
     }
     
     func setupView() {
@@ -70,9 +75,7 @@ extension AlarmTableViewController {
         for day in alarmsArray[indexPath.row].schedule.getAlarmDays() {
             for label in labelArray {
                 if day == label!.tag {
-                    print(day, label?.tag)
-                    label?.isHighlighted = true
-                    print(label?.isHighlighted)
+                    label!.isHighlighted = true
                 }
             }
         }
@@ -98,7 +101,7 @@ extension AlarmTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = AlarmSettingsViewController.loadViewController()
         
-        controller.alarm = alarmsArray[indexPath.row]
+        controller.alarmInView = alarmsArray[indexPath.row]
         
         self.navigationController?.pushViewController(controller, animated: true)
     }
