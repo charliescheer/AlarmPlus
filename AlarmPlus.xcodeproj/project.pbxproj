@@ -73,6 +73,7 @@
 		BA7DD23F21BDD4180081849B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BA911DA121B0A5680033A753 /* MemoryFunctions.swift */,
 				BA7DD24021BDD4290081849B /* StoryboardLoadable.swift */,
 				BADE982121E2574F005D6965 /* Calendar+Helpers.swift */,
 				BADE982321E25773005D6965 /* DateComponents+Helpers.swift */,
@@ -108,8 +109,11 @@
 		BABA18D22197911100B03CCD /* AlarmPlus */ = {
 			isa = PBXGroup;
 			children = (
-				BAE4D8BF21AF45FE004A70AB /* Views */,
+				BA7DD24221BDD8440081849B /* Storyboards */,
+				BA7DD23F21BDD4180081849B /* Helpers */,
+				BAE4D8C321AF4CA0004A70AB /* Styling */,
 				BA2564B12197B65300C712C2 /* Models */,
+				BAE4D8BF21AF45FE004A70AB /* Views */,
 				BABA18D32197911100B03CCD /* AppDelegate.swift */,
 				BABA18DA2197911300B03CCD /* Assets.xcassets */,
 				BABA18DC2197911300B03CCD /* LaunchScreen.storyboard */,
@@ -121,10 +125,6 @@
 		BAE4D8BF21AF45FE004A70AB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BA7DD24221BDD8440081849B /* Storyboards */,
-				BA7DD23F21BDD4180081849B /* Helpers */,
-				BAE4D8C321AF4CA0004A70AB /* Styling */,
-				BA911DA121B0A5680033A753 /* MemoryFunctions.swift */,
 				BA911D9F21B092F60033A753 /* AlarmSettingsViewController.swift */,
 				BABA18D52197911100B03CCD /* AlarmTableViewController.swift */,
 				BAE4D8C621AF56C4004A70AB /* AlarmTableViewCell.swift */,

@@ -9,7 +9,7 @@
 import UIKit
 
 class AlarmSettingsViewController: UIViewController {
-    var alarm : Alarm?
+    var alarmInView : Alarm?
     var selectedDays : [Int] = []
     var daySelectButtonsArray : [UIButton] = []
     
@@ -54,15 +54,14 @@ class AlarmSettingsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-        if alarm == nil {
+        if alarmInView == nil {
+            //right now this just displays noon, it doesn't create a new alarm or anything else.
             setupNewAlarmInfo()
             print("new alarm")
         } else {
             setupAlarmInfo()
             print("old alarm")
-            print(alarm?.schedule.getAlarmDays())
         }
-        print(alarm?.schedule.getAlarmTimeString())
     }
     
     
@@ -75,16 +74,25 @@ class AlarmSettingsViewController: UIViewController {
     @objc func rightButtonAction(sender: UIBarButtonItem) {
         //Save UIBarbutton item actions
         var alarmsArray = MemoryFunctions.getSavedAlarmsArray()
+        
         let (setHour, setMinute) = getUserSetTime(datePicker: datePicker)
         
-        if let currentAlarm = alarm {
+        if let currentAlarm = alarmInView {
             //If there is an alarm already update exsisting alarm
         
             currentAlarm.schedule.setAlarmTime(hour: setHour, minute: setMinute)
-            
             currentAlarm.schedule.setDaysActive(daysArray: selectedDays)
-            
             currentAlarm.schedule.setActiveAlarms()
+            
+            let uuid = currentAlarm.uuid
+            
+            alarmsArray.removeAll { (currentAlarm) -> Bool in
+                if case uuid = currentAlarm.uuid {
+                    return true
+                } else {
+                    return false
+                }
+            }
             
             alarmsArray.append(currentAlarm)
             
@@ -100,12 +108,14 @@ class AlarmSettingsViewController: UIViewController {
             
             MemoryFunctions.saveAlarmsToUserDefaults(alarmsArray)
         }
+        
+        self.navigationController?.popViewController(animated: true)
 
     }
     
     //Function gets the information from existing alarm and pupulates it on the view
     func setupAlarmInfo() {
-        guard let currentAlarm = alarm else {
+        guard let currentAlarm = alarmInView else {
             return
         }
         
@@ -126,8 +136,8 @@ class AlarmSettingsViewController: UIViewController {
     
     //Function creates a new alarm object and sets it with some default data
     func setupNewAlarmInfo() {
-        alarm = Alarm(hour: 12, minute: 00)
-        
+//        alarm = Alarm(hour: 12, minute: 00)
+//
         let calendar = Calendar(identifier: .gregorian)
         let date = Date()
         var dateCompenents = calendar.dateComponents(in: .current, from: date)
@@ -135,19 +145,19 @@ class AlarmSettingsViewController: UIViewController {
         dateCompenents.hour = 12
         dateCompenents.minute = 0
         
-        if let todaysDayOfTheWeekIndex = dateCompenents.weekday {
-            selectedDays.append(todaysDayOfTheWeekIndex)
-            
-            for dayButton in daySelectButtonsArray {
-                if dayButton.tag == todaysDayOfTheWeekIndex {
-                    dayButton.isSelected = true
-                }
-            }
-        }
+//        if let todaysDayOfTheWeekIndex = dateCompenents.weekday {
+//            selectedDays.append(todaysDayOfTheWeekIndex)
+//
+//            for dayButton in daySelectButtonsArray {
+//                if dayButton.tag == todaysDayOfTheWeekIndex {
+//                    dayButton.isSelected = true
+//                }
+//            }
+//        }
         datePicker.date = calendar.date(from: dateCompenents)!
     }
     
-    
+    //NOTE: see if this can be added to UIDatePicker instead of in the view controller
     func getUserSetTime(datePicker: UIDatePicker) -> (Int, Int){
         var hour = 0
         var minute = 0
@@ -168,6 +178,7 @@ class AlarmSettingsViewController: UIViewController {
         
     }
     
+    //NOTE: See if I can add this to DateComponents, maybe as a convenience init
     func createDateComponentsWithCalendar() -> DateComponents {
         var dateComponents = DateComponents()
         
@@ -178,12 +189,7 @@ class AlarmSettingsViewController: UIViewController {
     }
     
     func setCurrentAlarmDays() {
-//        guard let seclectedAlarm = alarm else {
-//            return
-//        }
-//
-//        alarmCurrentDays = seclectedAlarm.schedule.getAlarmDays()
-//
+
     }
 }
 
