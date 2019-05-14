@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Alert: NSObject {
+class Alert: Codable {
     private var fadeInEnabled : Bool = false
     private var alertVolume : Double?
     
@@ -40,7 +40,7 @@ class Alert: NSObject {
         
     }
     
-    func getAlarmVolume() -> Double {
+    func getAlarmVolume() -> Double? {
         return alertVolume
     }
 }
