@@ -26,11 +26,14 @@ class AlarmTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
+        
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         alarmsArray = MemoryFunctions.getSavedAlarmsArray()
+        alarmsArray = sortAlarmsArrayByTimeOfDay()
         tableView.reloadData()
         for alarm in alarmsArray {
             print(alarm.schedule.getAlarmTimeString())
@@ -38,15 +41,21 @@ class AlarmTableViewController: UITableViewController {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        MemoryFunctions.saveAlarmsToUserDefaults(alarmsArray)
+    }
+    
+    //MARK: Setup Functions
     func setupView() {
         view.backgroundColor = definedColors.backgroundColor
         table.rowHeight = 95
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        MemoryFunctions.saveAlarmsToUserDefaults(alarmsArray)
+    func sortAlarmsArrayByTimeOfDay() -> [Alarm] {
+        let sortedArray = alarmsArray.sorted {$0.schedule.getTimeAsInt() < $1.schedule.getTimeAsInt()}
+        
+        return sortedArray
     }
-    
     
 }
 
@@ -59,7 +68,6 @@ extension AlarmTableViewController {
         
         
         setupCellStyle(cell: cell)
-        cell.scheduledTimeLabel.text = alarmsArray[indexPath.row].schedule.getAlarmTimeString()
         displayCellData(cell: cell, indexPath: indexPath)
         
         

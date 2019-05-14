@@ -108,6 +108,17 @@ class Schedule: Codable {
         return timeString
     }
     
+    func getTimeAsInt() -> Int {
+        //This function is for ordering purposes.  There may be a better way to do this....
+        
+        var timeInt = 0
+        
+        timeInt = self.alarmTime[0] * 100
+        timeInt = timeInt + self.alarmTime[1]
+        
+        return timeInt
+    }
+    
     func addDateToActiveAlarms(_ day : Int) {
         var dateComponents = DateComponents()
         var calendar = Calendar(identifier: .gregorian)
