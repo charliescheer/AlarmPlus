@@ -9,12 +9,18 @@
 import UIKit
 
 class Schedule: Codable {
-    private var alarmTime: [Int] = []
-    private var repeatAlarm: Bool = false
-    private var daysActive: [Int] = []
-    private var alarmEnabled: Bool = true
-    private var activeAlarms: [Int : Date] = [ : ]
+//    private var alarmTime: [Int] = []
+    private var daysActiveArray: [Int] = []
+    private var dateComponents = DateComponents(withCalendar: .init(identifier: .gregorian))
     private var alarmDate = Date()
+    private var activeAlarms: [Int : Date] = [ : ]
+    private var nextAlarm = Date()
+    private var repeatAlarm: Bool = false
+    private var alarmEnabled: Bool = true
+    
+    init() {
+        self.dateComponents.calendar?.timeZone = .current
+    }
     
     func enableRepeat() {
         self.repeatAlarm = true
@@ -41,15 +47,15 @@ class Schedule: Codable {
     }
     
     func setDaysActive(daysArray: [Int]) {
-        self.daysActive = daysArray
+        self.daysActiveArray = daysArray
     }
     
-    func addToDaysActive(dayIndex: Int) {
-        self.daysActive.append(dayIndex)
-    }
+//    func addToDaysActive(dayIndex: Int) {
+//        self.daysActive.append(dayIndex)
+//    }
     
     func getAlarmDays() -> [Int] {
-        return self.daysActive
+        return self.daysActiveArray
     }
     
     func getAlarmTimes() -> [Int] {
@@ -58,21 +64,23 @@ class Schedule: Codable {
     
     func setAlarmTime(hour : Int, minute: Int) {
         self.alarmTime = [hour, minute]
+        self.dateComponents.hour = hour
+        self.dateComponents.minute = minute
     }
     
     func getAlarms() -> [Int : Date] {
         return activeAlarms
     }
     
-    func setActiveAlarms() {
+    func setActiveAlarmsArray() {
         //adds all of the different scheduled alarms to the activeAlarms array
         self.activeAlarms = [ : ]
-        for day in daysActive {
+        for day in daysActiveArray {
             addDateToActiveAlarms(day)
         }
     }
     
-    func setAlarmDate(with date : Date) {
+    private func setAlarmDate(with date : Date) {
         alarmDate = date
     }
     
@@ -126,6 +134,9 @@ class Schedule: Codable {
         calendar.timeZone = timeZone
         
         dateComponents.calendar = calendar
+        
+        
+        
         //set time for the new alarm
         if alarmTime.count == 2 {
             dateComponents = setHoursAndMinutesForNewAlarm(dateComponents)
@@ -135,6 +146,7 @@ class Schedule: Codable {
         
         //set date for the new alarm
         let date = getNextDate(dayOfTheWeek: day)
+        
         let nextScheduleDateComponents = calendar.dateComponents(in: .current, from: date)
         dateComponents.day = nextScheduleDateComponents.day
         dateComponents.month = nextScheduleDateComponents.month
@@ -153,10 +165,9 @@ class Schedule: Codable {
     //If a date can't be obtained will return 1 - Sunday
     func getTodaysDayIndex() -> Int {
         var todaysDayIndex = 0
-        let newDate = Date()
         
         let calendar = Calendar(identifier: .gregorian)
-        let todaysDateCompenents = calendar.dateComponents(in: .current, from: newDate)
+        let todaysDateCompenents = calendar.dateComponents(in: .current, from: Date())
         
         if let dayIndex = todaysDateCompenents.day {
             todaysDayIndex = dayIndex
@@ -167,7 +178,7 @@ class Schedule: Codable {
         return todaysDayIndex
     }
     
-    private func setHoursAndMinutesForNewAlarm(_ dateComponents: DateComponents) -> DateComponents{
+    private func setHoursAndMinutesForNewAlarm(_ dateComponents: DateComponents) -> DateComponents {
         var newDateComponents = dateComponents
         
         newDateComponents.hour = alarmTime[0]
@@ -175,7 +186,6 @@ class Schedule: Codable {
         
         return newDateComponents
     }
-    
     
     private func getNextDate(dayOfTheWeek: Int) -> Date{
         var newDate = Date()
@@ -186,6 +196,10 @@ class Schedule: Codable {
         if let todaysDayOfTheWeek = todaysDateCompenents.weekday {
             if dayOfTheWeek == todaysDayOfTheWeek {
                 //newDate is already set to today's date, make no changes
+                // if currentTime =< alarmTime {
+                //  make no changes
+                //  else
+                //  set time for the next day
             } else if dayOfTheWeek < todaysDayOfTheWeek {
                 // calculate the number of days to the next day of the week and return date
                 let daysTillSetDate = dayOfTheWeek - todaysDayOfTheWeek + 7
@@ -207,6 +221,22 @@ class Schedule: Codable {
         }
         
         return newDate
+    }
+    
+    private func setNextAlarmDate() {
+        let todaysIndex = getTodaysDayIndex()
+        
+        for day in daysActiveArray {
+            if day == todaysIndex {
+                
+            }
+        }
+        
+        
+    }
+    
+    func setAlarmTimeZone(timezone: TimeZone) {
+        self.dateComponents.calendar?.timeZone = timezone
     }
     
     

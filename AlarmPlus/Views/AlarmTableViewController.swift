@@ -35,9 +35,10 @@ class AlarmTableViewController: UITableViewController {
         alarmsArray = MemoryFunctions.getSavedAlarmsArray()
         alarmsArray = sortAlarmsArrayByTimeOfDay()
         tableView.reloadData()
+        
         for alarm in alarmsArray {
             print(alarm.schedule.getAlarmTimeString())
-            print(alarm.schedule.getAlarmDate())
+            print(alarm.schedule.getAlarms())
         }
     }
     

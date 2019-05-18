@@ -82,7 +82,7 @@ class AlarmSettingsViewController: UIViewController {
         
             currentAlarm.schedule.setAlarmTime(hour: setHour, minute: setMinute)
             currentAlarm.schedule.setDaysActive(daysArray: selectedDays)
-            currentAlarm.schedule.setActiveAlarms()
+            currentAlarm.schedule.setActiveAlarmsArray()
             
             let uuid = currentAlarm.uuid
             
@@ -102,7 +102,7 @@ class AlarmSettingsViewController: UIViewController {
             let newAlarm = Alarm(hour: setHour, minute: setMinute)
             
             newAlarm.schedule.setDaysActive(daysArray: selectedDays)
-            newAlarm.schedule.setActiveAlarms()
+            newAlarm.schedule.setActiveAlarmsArray()
             
             alarmsArray.append(newAlarm)
             
