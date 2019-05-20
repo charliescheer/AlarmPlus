@@ -36,10 +36,18 @@ class AlarmTableViewController: UITableViewController {
         alarmsArray = sortAlarmsArrayByTimeOfDay()
         tableView.reloadData()
         
-        for alarm in alarmsArray {
-            print(alarm.schedule.getAlarmTimeString())
-            print(alarm.schedule.getAlarms())
-        }
+//        for alarm in alarmsArray {
+//            print(alarm.schedule.getAlarmTimeString())
+//            print(alarm.schedule.getAlarms())
+//
+//            print(alarm.schedule.getNextAlarmDate())
+//
+//        }
+
+        //save for adding temporary data for testing.
+//        createTempData()
+//        MemoryFunctions.saveAlarmsToUserDefaults(alarmsArray)
+//        tableView.reloadData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -56,6 +64,43 @@ class AlarmTableViewController: UITableViewController {
         let sortedArray = alarmsArray.sorted {$0.schedule.getTimeAsInt() < $1.schedule.getTimeAsInt()}
         
         return sortedArray
+    }
+    
+    func createTempData() {
+        let tempAlarm = Alarm(snooze: Snooze(), alert: Alert(), schedule: Schedule())
+        
+        let daysActiveArray = [1,3,5,6]
+        
+        tempAlarm.schedule.setDaysActive(daysArray: daysActiveArray)
+        tempAlarm.schedule.setAlarmTime(hour: 8, minute: 00)
+        
+        tempAlarm.schedule.setActiveAlarmsArray()
+        
+        print(tempAlarm.schedule.getAlarms())
+        
+        let alarmDates = tempAlarm.schedule.getAlarms()
+        var tempDates: [Date] = []
+        
+        for day in daysActiveArray {
+            tempDates.append(alarmDates[day]!)
+        }
+        
+        var newDates: [Date] = []
+        let timeInterval = TimeInterval(exactly: -604800)
+        for date in tempDates {
+            let newdate = date.addingTimeInterval(timeInterval!)
+            newDates.append(newdate)
+        }
+        
+        for day in newDates {
+            let calendar = Calendar.init(identifier: .gregorian)
+            let dateComponents = calendar.dateComponents(in: .current, from: day)
+            
+            if let weekday = dateComponents.weekday {             tempAlarm.schedule.activeAlarms[weekday] = day
+            }
+        }
+        
+        alarmsArray.append(tempAlarm)
     }
     
 }
