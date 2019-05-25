@@ -9,7 +9,7 @@
 import UIKit
 
 class AlarmTableViewController: UITableViewController {
-    var scheduledAlarmEvents : [Date] = []
+//    var scheduledAlarmEvents : [Date] = []
     var alarmsArray : [Alarm] = []
     
     @IBOutlet var table: UITableView!
@@ -40,8 +40,11 @@ class AlarmTableViewController: UITableViewController {
             if alarm.schedule.containsExpiredAlarms() {
                 alarm.schedule.updateExpiredAlarms()
                 
-                print(alarm.schedule.getAlarms())
+                
             }
+            print(alarm.schedule.getAlarms())
+            print(alarm.isActive())
+            
         }
 
         //save for adding temporary data for testing.
@@ -121,6 +124,17 @@ extension AlarmTableViewController {
         setupCellStyle(cell: cell)
         displayCellData(cell: cell, indexPath: indexPath)
         
+        cell.callback = {(alarmEnabledSwitch) -> Void in
+            if alarmEnabledSwitch.isOn {
+                self.alarmsArray[indexPath.row].enable()
+                let active = self.alarmsArray[indexPath.row].isActive()
+                print(active)
+            } else {
+                self.alarmsArray[indexPath.row].disable()
+                let active = self.alarmsArray[indexPath.row].isActive()
+                print(active)
+            }
+        }
         
         return cell
         
@@ -131,6 +145,13 @@ extension AlarmTableViewController {
         
         cell.scheduledTimeLabel.text = alarmsArray[indexPath.row].schedule.getAlarmTimeString()
         
+        if alarmsArray[indexPath.row].isActive() {
+            cell.alarmEnabledSwitch.isOn = true
+        } else {
+            cell.alarmEnabledSwitch.isOn = false
+        }
+        
+        
         for day in alarmsArray[indexPath.row].schedule.getAlarmDays() {
             for label in labelArray {
                 if day == label!.tag {
@@ -138,6 +159,7 @@ extension AlarmTableViewController {
                 }
             }
         }
+        
         
     }
     
