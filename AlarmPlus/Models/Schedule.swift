@@ -142,7 +142,7 @@ class Schedule: Codable {
         }
     }
     
-    private func containsExpiredAlarms() -> Bool {
+    func containsExpiredAlarms() -> Bool {
         var includesExpiredAlarms = false
         
         let todaysDate = Date()

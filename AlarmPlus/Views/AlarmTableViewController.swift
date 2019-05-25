@@ -36,13 +36,17 @@ class AlarmTableViewController: UITableViewController {
         alarmsArray = sortAlarmsArrayByTimeOfDay()
         tableView.reloadData()
         
-//        for alarm in alarmsArray {
-//            print(alarm.schedule.getAlarmTimeString())
-//            print(alarm.schedule.getAlarms())
-//
-//            print(alarm.schedule.getNextAlarmDate())
-//
-//        }
+        for alarm in alarmsArray {
+            if alarm.schedule.containsExpiredAlarms() {
+                print("true")
+                print(alarm.schedule.getAlarms())
+                
+
+                alarm.schedule.updateExpiredAlarms()
+                print(alarm.schedule.getAlarms())
+                
+            }
+        }
 
         //save for adding temporary data for testing.
 //        createTempData()
@@ -86,11 +90,15 @@ class AlarmTableViewController: UITableViewController {
         }
         
         var newDates: [Date] = []
-        let timeInterval = TimeInterval(exactly: -604800)
+        let timeInterval = TimeInterval(exactly: -259200)
         for date in tempDates {
             let newdate = date.addingTimeInterval(timeInterval!)
             newDates.append(newdate)
         }
+        
+        print(newDates)
+        
+        tempAlarm.schedule.activeAlarms.removeAll()
         
         for day in newDates {
             let calendar = Calendar.init(identifier: .gregorian)
@@ -100,6 +108,7 @@ class AlarmTableViewController: UITableViewController {
             }
         }
         
+        print(tempAlarm.schedule.activeAlarms.keys)
         alarmsArray.append(tempAlarm)
     }
     
