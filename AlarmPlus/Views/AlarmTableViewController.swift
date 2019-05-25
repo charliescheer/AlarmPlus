@@ -38,13 +38,9 @@ class AlarmTableViewController: UITableViewController {
         
         for alarm in alarmsArray {
             if alarm.schedule.containsExpiredAlarms() {
-                print("true")
-                print(alarm.schedule.getAlarms())
-                
-
                 alarm.schedule.updateExpiredAlarms()
-                print(alarm.schedule.getAlarms())
                 
+                print(alarm.schedule.getAlarms())
             }
         }
 

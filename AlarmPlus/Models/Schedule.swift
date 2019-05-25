@@ -87,6 +87,17 @@ class Schedule: Codable {
         for day in daysActiveArray {
             addDateToActiveAlarmsDictionary(day)
         }
+        
+        
+        //Checks to see if any of the new dates are already in the past
+        //This fixes a problem whrere a date created with the same date, but an earlier time would create for today not next week
+        //If no active days were set this is ignored
+        if daysActiveArray.count == 0 {
+            print(daysActiveArray.count)
+            if self.containsExpiredAlarms() {
+                self.updateExpiredAlarms()
+            }
+        }
     }
 
     
@@ -221,7 +232,7 @@ class Schedule: Codable {
         
         //set date for the new alarm
         let tempDate = getNextDate(dayOfTheWeek: dayOfTheWeek)
-//        print(tempDate)
+        print(tempDate)
         let nextScheduleDateComponents = calendar.dateComponents(in: .current, from: tempDate)
 //        print(nextScheduleDateComponents)
         tempDateComponents.day = nextScheduleDateComponents.day
@@ -230,12 +241,20 @@ class Schedule: Codable {
         
 //        print(tempDateComponents.date)
         activeAlarms[dayOfTheWeek] = tempDateComponents.date
-   
-        //I think this can be removed - doesn't do what was planned.
-//        if let dateComponentsDate = dateComponents.date {
-//            setAlarmDate(with: dateComponentsDate)
-//        }
-
+        
+//        print(activeAlarms)
+    }
+    
+    
+    func increaseDateAtIndexByOneDay(dayOfTheWeek: Int) {
+        guard var date = self.activeAlarms[dayOfTheWeek] else {
+            return
+        }
+        
+        let timeInterval = TimeInterval(exactly: 86400)
+        date = date.addingTimeInterval(timeInterval!)
+        
+        self.activeAlarms[dayOfTheWeek] = date
     }
     
     //returns an int that represents what day of the week it is currently.
@@ -264,11 +283,7 @@ class Schedule: Codable {
         
         if let todaysDayOfTheWeek = todaysDateCompenents.weekday {
             if dayOfTheWeek == todaysDayOfTheWeek {
-                //newDate is already set to today's date, make no changes
-                // if currentTime =< alarmTime {
-                //  make no changes
-                //  else
-                //  set time for the next day
+                //do nothing
             } else if dayOfTheWeek < todaysDayOfTheWeek {
                 // calculate the number of days to the next day of the week and return date
                 let daysTillSetDate = dayOfTheWeek - todaysDayOfTheWeek + 7

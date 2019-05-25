@@ -101,12 +101,41 @@ class AlarmSettingsViewController: UIViewController {
             //if the alarm is nil create a new alarm with the current settings
             let newAlarm = Alarm(hour: setHour, minute: setMinute)
             
-            newAlarm.schedule.setDaysActive(daysArray: selectedDays)
-            newAlarm.schedule.setActiveAlarmsArray()
+            if selectedDays.count != 0 {
+                
+                newAlarm.schedule.setDaysActive(daysArray: selectedDays)
+                newAlarm.schedule.setActiveAlarmsArray()
+                
+            } else {
+                //If no days are selected, get the next possible instance of an alarm
+                let todaysDate = Date()
+                let calendar = Calendar(identifier: .gregorian)
+                let todaysDateComponents = calendar.dateComponents(in: .current, from: todaysDate)
+                
+                guard let todaysDayOfTheWeek = todaysDateComponents.weekday else {
+                    return
+                }
+                
+                selectedDays.append(todaysDayOfTheWeek)
+                newAlarm.schedule.setDaysActive(daysArray: selectedDays)
+                newAlarm.schedule.setActiveAlarmsArray()
+                selectedDays.removeAll()
+                newAlarm.schedule.setDaysActive(daysArray: selectedDays)
+                
+                
+                
+                
+                while newAlarm.schedule.containsExpiredAlarms() {
+                    newAlarm.schedule.increaseDateAtIndexByOneDay(dayOfTheWeek: todaysDayOfTheWeek)
+                }
+                
+                
+            }
             
             alarmsArray.append(newAlarm)
             
             MemoryFunctions.saveAlarmsToUserDefaults(alarmsArray)
+        
         }
         
         self.navigationController?.popViewController(animated: true)
