@@ -13,8 +13,8 @@ class Schedule: Codable {
     private var daysActiveArray: [Int] = []
     private var dateComponents = DateComponents(withCalendar: .init(identifier: .gregorian))
     private var alarmDate = Date()
-    private var activeAlarms: [Int : Date] = [ : ]
-    private var nextAlarm = Date()
+    //Set activeAlarms back to private after testing
+    var activeAlarms: [Int : Date] = [ : ]
     private var repeatAlarm: Bool = false
     private var alarmEnabled: Bool = true
     
@@ -50,20 +50,29 @@ class Schedule: Codable {
         self.daysActiveArray = daysArray
     }
     
-//    func addToDaysActive(dayIndex: Int) {
-//        self.daysActive.append(dayIndex)
-//    }
-    
     func getAlarmDays() -> [Int] {
         return self.daysActiveArray
     }
     
     func getAlarmTimes() -> [Int] {
-        return self.alarmTime
+        let alarmTimesArray = getAlarmTimeArrayFromDateComponents()
+        
+        return alarmTimesArray
+    }
+    
+    private func getAlarmTimeArrayFromDateComponents() -> [Int] {
+        var alarmTimeArray: [Int] = []
+        
+        guard let hour = dateComponents.hour, let minute = dateComponents.minute else {
+            return alarmTimeArray
+        }
+        
+        alarmTimeArray = [hour, minute]
+        
+        return alarmTimeArray
     }
     
     func setAlarmTime(hour : Int, minute: Int) {
-        self.alarmTime = [hour, minute]
         self.dateComponents.hour = hour
         self.dateComponents.minute = minute
     }
@@ -76,8 +85,86 @@ class Schedule: Codable {
         //adds all of the different scheduled alarms to the activeAlarms array
         self.activeAlarms = [ : ]
         for day in daysActiveArray {
-            addDateToActiveAlarms(day)
+            addDateToActiveAlarmsDictionary(day)
         }
+        
+        
+        //Checks to see if any of the new dates are already in the past
+        //This fixes a problem whrere a date created with the same date, but an earlier time would create for today not next week
+        //If no active days were set this is ignored
+        if daysActiveArray.count == 0 {
+            print(daysActiveArray.count)
+            if self.containsExpiredAlarms() {
+                self.updateExpiredAlarms()
+            }
+        }
+    }
+
+    
+    func getNextAlarmDate() -> Date {
+        var nextAlarmDate = Date()
+        
+        let todaysDate = Date()
+
+        
+        var tempActiveAlarmsArray: [Date] = []
+        for day in self.activeAlarms.values {
+            tempActiveAlarmsArray.append(day)
+        }
+        
+        tempActiveAlarmsArray.sort(by: <)
+        
+        if self.containsExpiredAlarms() {
+            for day in tempActiveAlarmsArray {
+                if day > todaysDate {
+                    nextAlarmDate = day
+                    break
+                }
+            }
+        } else {
+            //There is a crash here.  If there are no days set the tempActivealarms is empty.
+            nextAlarmDate = tempActiveAlarmsArray[0]
+        }
+        
+        return nextAlarmDate
+    }
+    
+    func updateExpiredAlarms() {
+        let todaysDate = Date()
+        var expiredAlarms: [Int] = []
+        
+        if self.containsExpiredAlarms() {
+            for date in activeAlarms.values {
+                if date < todaysDate {
+                    let calendar = Calendar(identifier: .gregorian)
+                    let dayOfTheWeek = calendar.component(.weekday, from: date)
+                    
+                    expiredAlarms.append(dayOfTheWeek)
+                }
+            }
+        }
+        
+        for day in expiredAlarms {
+            let timeInterval = TimeInterval(exactly: 604800)
+            if let tempDate = activeAlarms[day] {
+              activeAlarms[day] = tempDate.addingTimeInterval(timeInterval!)
+            }
+            
+        }
+    }
+    
+    func containsExpiredAlarms() -> Bool {
+        var includesExpiredAlarms = false
+        
+        let todaysDate = Date()
+        
+        for date in activeAlarms.values {
+            if date < todaysDate {
+                includesExpiredAlarms = true
+            }
+        }
+        
+        return includesExpiredAlarms
     }
     
     private func setAlarmDate(with date : Date) {
@@ -91,22 +178,24 @@ class Schedule: Codable {
     func getAlarmTimeString() -> String {
         var timeString : String = ""
         
-        if self.alarmTime.count != 0 {
-            if self.alarmTime[0] <= 12 {
-                timeString.append(String(self.alarmTime[0]))
+        let alarmTimesArray = getAlarmTimeArrayFromDateComponents()
+        
+        if alarmTimesArray.count != 0 {
+            if alarmTimesArray[0] <= 12 {
+                timeString.append(String(alarmTimesArray[0]))
             } else {
-                timeString.append(String(self.alarmTime[0]-12))
+                timeString.append(String(alarmTimesArray[0]-12))
             }
             
             timeString.append(" : ")
             
-            if self.alarmTime[1] > 9 {
-                timeString.append(String(self.alarmTime[1]))
+            if alarmTimesArray[1] > 9 {
+                timeString.append(String(alarmTimesArray[1]))
             } else {
-                timeString.append("0" + String(self.alarmTime[1]))
+                timeString.append("0" + String(alarmTimesArray[1]))
             }
             
-            if self.alarmTime[0] < 12 {
+            if alarmTimesArray[0] < 12 {
                 timeString.append(" am")
             } else {
                 timeString.append(" pm")
@@ -118,46 +207,54 @@ class Schedule: Codable {
     
     func getTimeAsInt() -> Int {
         //This function is for ordering purposes.  There may be a better way to do this....
-        
         var timeInt = 0
+        let alarmTimesArray = getAlarmTimeArrayFromDateComponents()
         
-        timeInt = self.alarmTime[0] * 100
-        timeInt = timeInt + self.alarmTime[1]
+        timeInt = alarmTimesArray[0] * 100
+        timeInt = timeInt + alarmTimesArray[1]
         
         return timeInt
     }
     
-    func addDateToActiveAlarms(_ day : Int) {
-        var dateComponents = DateComponents()
+    func addDateToActiveAlarmsDictionary(_ dayOfTheWeek : Int) {
+        let alarmTimesArray = getAlarmTimeArrayFromDateComponents()
+        
+        //confirms there is an hour and minute in the date components
+        guard alarmTimesArray.count == 2 else {
+            return
+        }
+        
+        
+        var tempDateComponents = self.dateComponents
         var calendar = Calendar(identifier: .gregorian)
         let timeZone = TimeZone.current
         calendar.timeZone = timeZone
         
-        dateComponents.calendar = calendar
-        
-        
-        
-        //set time for the new alarm
-        if alarmTime.count == 2 {
-            dateComponents = setHoursAndMinutesForNewAlarm(dateComponents)
-        } else {
-            print("Time is out of range")
-        }
-        
         //set date for the new alarm
-        let date = getNextDate(dayOfTheWeek: day)
+        let tempDate = getNextDate(dayOfTheWeek: dayOfTheWeek)
+        print(tempDate)
+        let nextScheduleDateComponents = calendar.dateComponents(in: .current, from: tempDate)
+//        print(nextScheduleDateComponents)
+        tempDateComponents.day = nextScheduleDateComponents.day
+        tempDateComponents.month = nextScheduleDateComponents.month
+        tempDateComponents.year = nextScheduleDateComponents.year
         
-        let nextScheduleDateComponents = calendar.dateComponents(in: .current, from: date)
-        dateComponents.day = nextScheduleDateComponents.day
-        dateComponents.month = nextScheduleDateComponents.month
-        dateComponents.year = nextScheduleDateComponents.year
+//        print(tempDateComponents.date)
+        activeAlarms[dayOfTheWeek] = tempDateComponents.date
         
-        activeAlarms[day] = dateComponents.date
-        
-        if let dateComponentsDate = dateComponents.date {
-            setAlarmDate(with: dateComponentsDate)
+//        print(activeAlarms)
+    }
+    
+    
+    func increaseDateAtIndexByOneDay(dayOfTheWeek: Int) {
+        guard var date = self.activeAlarms[dayOfTheWeek] else {
+            return
         }
-
+        
+        let timeInterval = TimeInterval(exactly: 86400)
+        date = date.addingTimeInterval(timeInterval!)
+        
+        self.activeAlarms[dayOfTheWeek] = date
     }
     
     //returns an int that represents what day of the week it is currently.
@@ -178,15 +275,6 @@ class Schedule: Codable {
         return todaysDayIndex
     }
     
-    private func setHoursAndMinutesForNewAlarm(_ dateComponents: DateComponents) -> DateComponents {
-        var newDateComponents = dateComponents
-        
-        newDateComponents.hour = alarmTime[0]
-        newDateComponents.minute = alarmTime[1]
-        
-        return newDateComponents
-    }
-    
     private func getNextDate(dayOfTheWeek: Int) -> Date{
         var newDate = Date()
         
@@ -195,16 +283,12 @@ class Schedule: Codable {
         
         if let todaysDayOfTheWeek = todaysDateCompenents.weekday {
             if dayOfTheWeek == todaysDayOfTheWeek {
-                //newDate is already set to today's date, make no changes
-                // if currentTime =< alarmTime {
-                //  make no changes
-                //  else
-                //  set time for the next day
+                //do nothing
             } else if dayOfTheWeek < todaysDayOfTheWeek {
                 // calculate the number of days to the next day of the week and return date
                 let daysTillSetDate = dayOfTheWeek - todaysDayOfTheWeek + 7
                 
-                print(daysTillSetDate)
+//                print(daysTillSetDate)
                 if let modifiedDate = calendar.date(byAdding: .day, value: daysTillSetDate, to: newDate) {
                     newDate = modifiedDate
                 }

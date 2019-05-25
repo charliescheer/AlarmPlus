@@ -15,6 +15,7 @@ class Alarm: Codable {
     var alert = Alert()
     var schedule = Schedule()
     var uuid : String = ""
+    private var active = true
     
     init(snooze: Snooze, alert: Alert, schedule: Schedule) {
         self.snooze = snooze
@@ -38,6 +39,18 @@ class Alarm: Codable {
 
     func getSchedule() -> Schedule {
         return schedule
+    }
+    
+    func enable() {
+        self.active = true
+    }
+    
+    func disable() {
+        self.active = false
+    }
+    
+    func isActive() -> Bool {
+        return self.active
     }
 
 }

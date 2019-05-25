@@ -21,8 +21,12 @@ class AlarmTableViewCell: UITableViewCell {
     @IBOutlet weak var alarmEnabledSwitch: UISwitch!
     @IBOutlet weak var snoozeLimitLabel: UILabel!
     
-    @IBAction func alarmEnabledSwitchTapped(_ sender: Any) {
-        //   ???
+    var callback: ((_ switch: UISwitch) -> Void)?
+    var value: Bool =  true
+    
+    @IBAction func alarmEnabledSwitchTapped(_ sender: UISwitch) {
+        self.value = sender.isOn
+        callback?(sender)
     }
     
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class AlarmTableViewController: UITableViewController {
-    var scheduledAlarmEvents : [Date] = []
+//    var scheduledAlarmEvents : [Date] = []
     var alarmsArray : [Alarm] = []
     
     @IBOutlet var table: UITableView!
@@ -37,9 +37,20 @@ class AlarmTableViewController: UITableViewController {
         tableView.reloadData()
         
         for alarm in alarmsArray {
-            print(alarm.schedule.getAlarmTimeString())
+            if alarm.schedule.containsExpiredAlarms() {
+                alarm.schedule.updateExpiredAlarms()
+                
+                
+            }
             print(alarm.schedule.getAlarms())
+            print(alarm.isActive())
+            
         }
+
+        //save for adding temporary data for testing.
+//        createTempData()
+//        MemoryFunctions.saveAlarmsToUserDefaults(alarmsArray)
+//        tableView.reloadData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -58,6 +69,48 @@ class AlarmTableViewController: UITableViewController {
         return sortedArray
     }
     
+    func createTempData() {
+        let tempAlarm = Alarm(snooze: Snooze(), alert: Alert(), schedule: Schedule())
+        
+        let daysActiveArray = [1,3,5,6]
+        
+        tempAlarm.schedule.setDaysActive(daysArray: daysActiveArray)
+        tempAlarm.schedule.setAlarmTime(hour: 8, minute: 00)
+        
+        tempAlarm.schedule.setActiveAlarmsArray()
+        
+        print(tempAlarm.schedule.getAlarms())
+        
+        let alarmDates = tempAlarm.schedule.getAlarms()
+        var tempDates: [Date] = []
+        
+        for day in daysActiveArray {
+            tempDates.append(alarmDates[day]!)
+        }
+        
+        var newDates: [Date] = []
+        let timeInterval = TimeInterval(exactly: -259200)
+        for date in tempDates {
+            let newdate = date.addingTimeInterval(timeInterval!)
+            newDates.append(newdate)
+        }
+        
+        print(newDates)
+        
+        tempAlarm.schedule.activeAlarms.removeAll()
+        
+        for day in newDates {
+            let calendar = Calendar.init(identifier: .gregorian)
+            let dateComponents = calendar.dateComponents(in: .current, from: day)
+            
+            if let weekday = dateComponents.weekday {             tempAlarm.schedule.activeAlarms[weekday] = day
+            }
+        }
+        
+        print(tempAlarm.schedule.activeAlarms.keys)
+        alarmsArray.append(tempAlarm)
+    }
+    
 }
 
 extension AlarmTableViewController {
@@ -71,6 +124,17 @@ extension AlarmTableViewController {
         setupCellStyle(cell: cell)
         displayCellData(cell: cell, indexPath: indexPath)
         
+        cell.callback = {(alarmEnabledSwitch) -> Void in
+            if alarmEnabledSwitch.isOn {
+                self.alarmsArray[indexPath.row].enable()
+                let active = self.alarmsArray[indexPath.row].isActive()
+                print(active)
+            } else {
+                self.alarmsArray[indexPath.row].disable()
+                let active = self.alarmsArray[indexPath.row].isActive()
+                print(active)
+            }
+        }
         
         return cell
         
@@ -81,6 +145,13 @@ extension AlarmTableViewController {
         
         cell.scheduledTimeLabel.text = alarmsArray[indexPath.row].schedule.getAlarmTimeString()
         
+        if alarmsArray[indexPath.row].isActive() {
+            cell.alarmEnabledSwitch.isOn = true
+        } else {
+            cell.alarmEnabledSwitch.isOn = false
+        }
+        
+        
         for day in alarmsArray[indexPath.row].schedule.getAlarmDays() {
             for label in labelArray {
                 if day == label!.tag {
@@ -88,6 +159,7 @@ extension AlarmTableViewController {
                 }
             }
         }
+        
         
     }
     
